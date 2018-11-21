@@ -11,5 +11,5 @@ setup(name='pyma',
       author='Sabry Moustafa',
       author_email='sabrygad@buffalo.edu',
       packages=['pyma'],
-      scripts=['scripts/pyma'],
+      scripts=['scripts/pyma']
       )

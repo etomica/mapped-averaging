@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyhma'
+project = 'pyma'
 copyright = '2018, Sabry Moustafa'
 author = 'Sabry Moustafa'
 

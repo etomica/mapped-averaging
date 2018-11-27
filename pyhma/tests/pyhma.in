@@ -1,5 +1,0 @@
-TEMP    1000 # temperature (K)
-DPRESS  10   # estimate of (P-P_lat) (GPa)
-NEQ     1000 # equilibration
-BLOCK   50   # blocksize
-UNITS   meV  # kJ/mol

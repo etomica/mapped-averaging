@@ -1,18 +1,6 @@
 
-Welcome to pyHMA! 
-===============================
-
-.. warning:: This is not final!
-
-This is literal::
-
-  >> x+y=1
-  >> 2
-
-.. code-block:: py
-
-   >> x+y
-   >> 3
+Welcome to pyxma
+=================
 
 .. figure:: picture.png
    :scale: 100 %
@@ -21,21 +9,10 @@ This is literal::
 
 .. toctree::
    :maxdepth: 1 
-   
-   read
 
-
-
-
-Documentation
-=============
-
-.. toctree::
-   :maxdepth: 2 
-   
-   compute
-
-
+   getting_started
+   theory
+   applications
 
 
 Indices and tables

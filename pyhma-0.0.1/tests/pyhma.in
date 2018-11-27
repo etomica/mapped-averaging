@@ -1,0 +1,5 @@
+TEMP    1000 # temperature (K)
+PQH_T   0.004   # quasiharmonic pressure (GPa/K)
+NEQ     100 # equilibration
+BLOCK   100   # blocksize
+EUNITS  meV  # meV (for meV/atom) or kJ (for kJ/mol)

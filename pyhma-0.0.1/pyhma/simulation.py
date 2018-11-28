@@ -81,10 +81,10 @@ class Simulation:
       for l,line in enumerate(file_posfor):
         n = (l % int(self.n_atoms+1))-1  # n=-1,0,1,..N-1
         if n == -1: # beginning of each snap
-          e = float(file_u.readline())
+          u = float(file_u.readline())/self.n_atoms
           p_vir = float(file_p.readline())  # p_vir = p_conv - p_ig
           if is_first_step:
-            self.e_lat = e
+            self.u_lat = u/self.n_atoms
             self.p_lat = p_vir
             is_first_step = False
             self.md_steps = 1
@@ -101,8 +101,8 @@ class Simulation:
           fdr = fdr + f.dot(dr) 
           if n == self.n_atoms-1: # last atom
             # anharmonic energy
-            uah_conv = (e-self.e_lat - 1.5*kBT_eV*(self.n_atoms-1))/self.n_atoms
-            uah_hma  = (e-self.e_lat + 0.5*fdr)/self.n_atoms
+            uah_conv = u-self.u_lat - 1.5*kBT_eV*(self.n_atoms-1)/self.n_atoms
+            uah_hma  = u-self.u_lat + 0.5*fdr/self.n_atoms
             print('% d  % 0.15f  % 0.15f' % (self.md_steps, uah_conv  , uah_hma) , file=file_uah)
             
             # pressure (off p_lat)
@@ -120,11 +120,11 @@ class Simulation:
 
 
 
-    print(' Lattice (row) vectors:')
-    print(self.lat_vecs,'\n')
+    #print(' Lattice (row) vectors:')
+    #print(self.lat_vecs,'\n')
     print(' Temperature           (K):' , self.temperature)
     print(' Volume       (Ang^3/atom):', self.volume)
-    print(' Lattice energy  (eV/atom):', self.e_lat/self.n_atoms)
+    print(' Lattice energy  (eV/atom):', self.u_lat)
     print(' Harmonic energy (eV/atom):', 1.5*kBT_eV*(self.n_atoms-1)/self.n_atoms)
 
     print(' Lattice pressure    (GPa):', self.p_lat)

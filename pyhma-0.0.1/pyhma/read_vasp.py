@@ -1,15 +1,25 @@
+##############################################################################
+# pymbar: A Python Library for pyhma
+#
+# Copyright 2018 University at Buffalo
+#
+# See the MIT License for more details. 
+##############################################################################
+
+"""A module to read VASP OUTCAR data for pyhma
+
+"""
+
+
 import numpy as np
 import sys
-
-"""
-
-Before ReadVASP class
-
-"""
 
 class ReadVASP:
 
   """
+
+  Notes
+  -------
 
   After ReadVASP class
 
@@ -18,10 +28,20 @@ class ReadVASP:
 
   
   def __init__(self, *filenames):  # tuple of filenames
+    """ Initialize ReadVASP ...
+
+    """
     self.filenames = filenames
     self.force_tol = 1e-4
 
   def read(self):
+
+    """ Read data from OUTCAR file
+
+    Parameters:
+    ------------
+
+    """
     # create: energy (u.dat), pressure (p.dat), positions-forces (posfor.dat), and lattice (lattice.dat)
     file_u         = open('u.dat', 'w')
     file_p         = open('p.dat', 'w')
@@ -132,6 +152,11 @@ class ReadVASP:
 
 
   def _get_max_forces(self, forces):
+
+    """ Check if some atoms has nonzero forces
+
+    """
+    
     print()
     is_large_force = False
     for i,v in enumerate(forces):

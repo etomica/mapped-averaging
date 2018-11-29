@@ -1,6 +1,32 @@
 Getting Started
-===============
+################
 
+.. highlight:: bash
+
+Installing ``pyxma``
+=====================
+
+pip
+----
+Or, using the `Python package index <https://pypi.python.org/pypi/pyxma>`_ using ``pip``:
+
+.. code-block:: bash
+
+   pip install pyxma
+
+
+
+conda
+------
+You can install ``pyxma`` via `conda <http://conda.pydata.org>`_:
+
+.. code-block:: bash
+
+   conda install -c omnia pyxma
+
+
+Example
+========
 
 .. code-block:: python
 

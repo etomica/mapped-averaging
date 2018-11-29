@@ -11,7 +11,7 @@ pyhma
    * **u.dat [eV]:** contains the potential energy at each step.
    * **p.dat [GPa]:** contains the virial pressure (:math:`-dU/dV`, with uniform scaling of coordinates) at each step.
 
-For the case of VASP, this step is done using the :class:`pyhma.ReadVASP` class to read the OUTCAR files as following:
+For the case of VASP, this step is done using the :class:`pyhma.ReadVASP` class as following:
 
 .. code-block:: python
 
@@ -25,21 +25,16 @@ Or, it can be invoked using the ``pyhma`` script:
 
    pyhma --readvasp OUTCAR1 OUTCAR2
 
-.. warning::
-
-   The configuration of the first molecular simulation step must be one at minimized energy (i.e., zero force on each).
 
 **2. Computing averages**
 
 In this step, the .dat files generated in the first step are used to compute (conventional and hma) anharmonic ensemble averages (currently, energy and pressure) using the :class:`pyhma.Simulation` class. Since the .dat files are universal, this step is independent on the molecular simulation code.
 
-Here is an example of hpw to use 
-
 .. code-block:: python
 
    >>> import pyhma
    >>> sim = Simulation()
-   >>> sim.run()  # computes conventional and hma estimates for each configuration
+   >>> sim.run()  # computes conventional and hma estimates for each configuraion
    >>> data = sim.get_statistics() # computes average, stochastic uncertainty (1:math:`\sigma`), and correlation
    >>> print(' Anharmonic energy (conv.)  :', data['uahc'], '[eV/atom]')
    >>> print(' Anharmonic energy (hma)    :', data['uahm'], '[eV/atom]')

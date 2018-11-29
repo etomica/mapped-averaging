@@ -1,4 +1,4 @@
-pyLMA
+pylma
 #####
 
 reading data

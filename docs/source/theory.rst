@@ -1,8 +1,7 @@
-Theory
-#######
+Mapped-averaging theory
+########################
 
-Absolute free energy
-------------------------
+**Absolute free energy**
 
 The Helmholtz free energy :math:`A` of a system at temperature :math:`T` and volume :math:`V` is related to its configurational partition function :math:`Q` via:
 
@@ -15,8 +14,8 @@ where :math:`Q` is given by
 with :math:`{\bf x}` represents coordinates of all atoms.
 For simplicity, we will use unitless energy :math:`{\cal U}\equiv \beta U` and free energy :math:`{\cal A}\equiv \beta A` (and their derivatives; e.g., force).
 
-Free energy derivatives
-------------------------
+**Free energy derivatives**
+
 Derivative of free energy w.r.t external distortion (e.g., temperature or volume) is related to material properites. For example, average energy :math:`U` and pressure :math:`P` are given by
 
 .. math::

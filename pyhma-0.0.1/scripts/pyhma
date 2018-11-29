@@ -57,14 +57,13 @@ elif '--compute' in opts_dic:
 
   data = sim.get_statistics()
 
-  print(' Average anharmonic energy')
-  print(' -------------------------')
-  print(' Uah_conv (eV/atom):', data['uahc'])
-  print(' Uah_hma  (eV/atom):', data['uahm'],'\n')
-  print(' Average anharmonic pressure')
-  print(' ---------------------------')
-  print(' Pah_conv (GPa):', data['pahc'])
-  print(' Pah_hma  (GPa):', data['pahm'])
+  print(' Anharmonic energy [eV/atom]:')
+  print('  conv.:', data['uahc'])
+  print('  hma  :', data['uahm'],'\n')
+  print(' Anharmonic pressure [GPa]:')
+  print('  conv.:', data['pahc'])
+  print('  hma  :', data['pahm'])
+
 
 
 

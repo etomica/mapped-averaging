@@ -32,7 +32,7 @@ class ReadVASP:
 
     """
     self.filenames = filenames
-    self.force_tol = 1e-4
+    self.force_tol = 1e-3
 
   def read(self):
 

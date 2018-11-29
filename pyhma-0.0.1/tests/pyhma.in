@@ -1,5 +1,5 @@
+# pyhma.in input file for step #2
 TEMP    1000 # temperature (K)
-PQH_T   0.004   # quasiharmonic pressure (GPa/K)
-NEQ     100 # equilibration
-BLOCK   100   # blocksize
-EUNITS  meV  # meV (for meV/atom) or kJ (for kJ/mol)
+PQH     4.0  # quasiharmonic pressure (GPa/K)
+NEQ     100  # equilibration steps
+BLOCK   100  # blocksize (in steps)

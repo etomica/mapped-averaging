@@ -51,14 +51,12 @@ class Simulation:
         bits=line.split()
         if 'TEMP' in line:
           self.temperature = float(bits[1]) # K
-        if 'PQH_T' in line:
-          self.p_qh_T = float(bits[1]) # GPa/K
+        if 'PQH' in line:
+          self.p_qh = float(bits[1]) # GPa
         if 'NEQ' in line:
           self.n_eq = int(bits[1])
         if 'BLOCK' in line:
           self.blocksize = int(bits[1])
-        if 'EUNITS' in line:
-          self.e_units = bits[1]
 
 
 
@@ -71,7 +69,6 @@ class Simulation:
     self.volume = np.dot(tmp_vec , self.lat_vecs[2])/self.n_atoms # Ang^3/atom
     self.density = 1.0/self.volume   # 1/m^3
     self.p_ig = self.density*1e30*kBT_J*1e-9  # GPa
-    self.p_qh = self.p_qh_T*self.temperature
 
     f_v = (self.p_qh*1e9/kBT_J-self.density*1e30)/(3*(self.n_atoms-1))*1e-9  # GPa/J
     is_first_step = True

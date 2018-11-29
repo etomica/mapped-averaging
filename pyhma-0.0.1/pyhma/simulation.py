@@ -144,10 +144,10 @@ class Simulation:
     # Correlation
     data_ac = self.get_ac(data_prod_block)
 
-    return {'uahc': {'avg': data_avg[0], 'err': data_err[0], 'corr': data_ac[0]},\
-            'uahm': {'avg': data_avg[1], 'err': data_err[1], 'corr': data_ac[1]}, \
-            'pahc': {'avg': data_avg[2], 'err': data_err[2], 'corr': data_ac[2]}, \
-            'pahm': {'avg': data_avg[3], 'err': data_err[3], 'corr': data_ac[3]}}
+    return {'uahc': {'avg': data_avg[0] , 'err': data_err[0] , 'corr': data_ac[0]},\
+            'uahm': {'avg': data_avg[1] , 'err': data_err[1] , 'corr': data_ac[1]}, \
+            'pahc': {'avg': data_avg[2] , 'err': data_err[2] , 'corr': data_ac[2]}, \
+            'pahm': {'avg': data_avg[3] , 'err': data_err[3] , 'corr': data_ac[3]}}
 
 
 

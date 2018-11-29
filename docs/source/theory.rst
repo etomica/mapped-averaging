@@ -1,20 +1,20 @@
 Mapped-averaging theory
 ########################
 
-* **Absolute free energy**
+Absolute free energy
+=======================
 
 The Helmholtz free energy :math:`A` of a system at temperature :math:`T` and volume :math:`V` is related to its configurational partition function :math:`Q` via:
 
 .. math::
-   A = -k_{\rm B}T \ln{Q}
-where :math:`Q` is given by
-
-.. math::
+   A = -k_{\rm B}T \ln{Q} \qquad {\rm where} \qquad 
    Q = \int_{V} e^{-\beta U\left({\bf x}\right)} {\rm d} {\bf x}
+
 with :math:`{\bf x}` represents coordinates of all atoms.
 For simplicity, from now on we will be using unitless energy :math:`{\cal U}\equiv \beta U` and free energy :math:`{\cal A}\equiv \beta A` (and their derivatives; e.g., force).
 
-* **Free energy derivatives**
+Free energy derivatives
+========================
 
 Derivative of free energy w.r.t external perturpation or distortion (e.g., temperature or volume) is related to material properites. For example, average energy :math:`U` and pressure :math:`P` are given by
 
@@ -61,9 +61,6 @@ where we used the :math:`{\rm D}_{\nu}` operator on some function :math:`f({\bf 
    - {\rm Cov}\left({\rm D}_{\nu} {\cal U'} \;,\; {\rm D}_{\mu} {\cal U'} \right) 
 
 where, :math:`{\rm Cov}\left(X,Y\right)\equiv \left<XY\right> - \left<X\right> \left<Y\right>` is the covariance between the stochastic variables :math:`X` and :math:`Y`.
-
-* **Evaluation of energy derivatives**
-
 We are left with evaluating derivatives of :math:`{\cal U'}`, which are related to :math:`U` derivatives via
 
 .. math::
@@ -71,6 +68,9 @@ We are left with evaluating derivatives of :math:`{\cal U'}`, which are related 
    \qquad {\rm and} \qquad 
    {\rm D}_{\mu\nu} {\cal U'} = {\rm D}_{\mu\nu} {\cal U} - {\rm D}_{\mu\nu} J 
 
+|
+
+1. *Evaluation of U derivatives*
 
 First, :math:`\cal U` derivatives can be directly evaluated using the relation between the total (Lagrangian) and partial (Eulerian) derivatives: 
 
@@ -87,6 +87,10 @@ where :math:`{\cal F}\equiv -\nabla {\cal U}=-\beta \nabla U` is forces vector o
    + {\bf v}^{\mu} \cdot \partial_{\nu} {\cal F} \right)
 
 where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix.
+
+|
+
+2. *Evaluation of J derivatives*
 
 Now, in order to get :math:`{\rm D}_{\nu}J`, we need to do two steps. First, perform diffirentiation of the phase space volume, using (again) the change of variables technique 
 
@@ -122,16 +126,48 @@ Since we are interested at evaluating the derivatives at :math:`{\bf y}={\bf x}`
 :math:`{\rm D}_{\nu}J = \nabla \cdot {\bf v}^{\nu}` and :math:`{\rm D}_{\mu\nu}J = \nabla \cdot \left(\partial_{\mu}{\bf v}^{\nu}\right)  + {\bf v}^{\mu}\cdot \nabla\left(\nabla\cdot{\bf v}^{\nu}\right)`. 
 
 
-**Final expressions**
+
+
+
+Mapping velocity
+=================
+Since :math:`Q` is only a function of :math:`\lambda`, **average** free energy dervatives do not depend on how :math:`{\bf x}` get mapped into the :math:`{\bf y}` coordinates; or, in other words, they do not depend on the mapping velocity :math:`{\bf v}^{\nu}`. However, the **fluctuations** (or uncertainty) in these averages do depend on the mapping. Therefore, for the purposes of molecular simulation measurments we need to choose :math:`{\bf v^{\nu}}` that reduces the stocuastic uncertainty as much as possible.
+
+To develope such a mapping we need to recognize that free energy derivatives are given as ensemble averages over :math:`{\rm D}_{\nu} {\cal U'}` (and its derivative, :math:`{\rm D}_{\mu\nu} {\cal U'}`).
+Therefore, a perfect mapping is such that :math:`{\rm D}_{\nu} {\cal U'}` is independent on coordinates :math:`\bf x`; hence
 
 .. math::
-   \partial_{\nu}{\cal A} = \left< \partial_{\nu} {\cal U} - \nabla \cdot {\bf v}^{\nu} - {\cal F}\cdot {\bf v}^{\nu}\right>
+   \partial_{\nu}{\cal A} = \; \left< {\rm D}_{\nu} {\cal U'} \right> 
+   = {\rm D}_{\nu} {\cal U'}
 
-   \left< {\rm D}_{\nu}{\cal U'} {\rm D}_{\mu}{\cal U'} \right> 
-   - \left< {\rm D}_{\nu} {\cal U'} \right>  \left< {\rm D}_{\mu} {\cal U'} \right> 
+Using the above energy and Jacobian derivatives, we get
 
-   ......................
+.. math::
+   \partial_{\nu}{\cal A} = \partial_{\nu} {\cal U} - \nabla \cdot {\bf v}^{\nu} - {\cal F}\cdot {\bf v}^{\nu}
+
+Solving this equation yields the unique mapping that yields no fluctuations; however, there are two problems. First of all, :math:`\partial_{\nu}{\cal A}` is the very quantity that we need to measure. Second, since :math:`{\bf v}^{\nu}` is a multidimentional vector (:math:`3N` for the case of atomic systems) we have underdetermined system as we only have one equation to solve. 
+
+The first problem is solved using the fast that :math:`{\bf v}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system, which we will call reference. 
+
+.. math::
+   \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\bf v}^{\nu} - {\cal F}^{\rm ref}\cdot {\bf v}^{\nu}
+
+where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a contant (only function of :math:`\lambda`), named :math:`c`.
+
+To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
+
+.. math::
+   c = \partial_{\nu}{\cal a}^{\rm ref} = \partial_{\nu} {\cal u}^{\rm ref} - \partial_{\nu} v^{\nu} - {\cal f}^{\rm ref} v^{\nu}
+
+where small symbols represent an extensive quantity (i.e., :math:`x\equiv X/{\rm dof}`). For a given configuration :math:`\bf x`, this is a standard first-order differential equation with variable coefficients in :math:`\nu`
+
+.. math::
+    \partial_{\nu} v^{\nu} + {\cal f}^{\rm ref} v^{\nu} =
+    \partial_{\nu}{\cal u}^{\rm ref} - c = g
 
 
-**Mapping**
+..   \partial_{\nu}{\cal A} = \left< \partial_{\nu} {\cal U} - \nabla \cdot {\bf v}^{\nu} - {\cal F}\cdot {\bf v}^{\nu}\right>
+..   \left< {\rm D}_{\nu}{\cal U'} {\rm D}_{\mu}{\cal U'} \right> 
+..   - \left< {\rm D}_{\nu} {\cal U'} \right>  \left< {\rm D}_{\mu} {\cal U'} \right> 
+
 

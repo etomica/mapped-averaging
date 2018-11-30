@@ -113,7 +113,7 @@ class Simulation:
               self.data = np.append(self.data , [[uah_conv  , uah_hma, pah_conv, pah_hma]] , axis = 0)
             self.md_steps+=1
 
-    print(' Done. Found', (self.md_steps-1-self.n_eq) , 'steps after', self.n_eq ,'steps of equilibaration\n')
+    print(' Done. Found', (self.md_steps-1-self.n_eq) , 'steps after', self.n_eq ,'steps of equilibration\n')
 
 
 

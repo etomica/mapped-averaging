@@ -1,17 +1,5 @@
-README PLEASE!
-===============
+Welcome to the mapped-averaging project
+=========================================
 
-Why not?!
+This project is a Python implementation of the `mapped-averaging <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ method for precise estimation of ensemble averages from molecular simulation outputs.
 
-
-Documentation for mapped-averaging
-==================================
-
-dA/dx = 0
-
-Section A
-----------
-
-
-Section B
-==========

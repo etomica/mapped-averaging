@@ -9,30 +9,10 @@ opts_dic=dict(opts)
 
 if '--help' in opts_dic or (len(opts) == 0 and len(args) == 0):
   print('Usage:')
-  print('     Step #1 (read data):  pyhma --readvasp OUTCAR(s)')
+  print('     Step #1 (read data):  pyhma --readvasp OUTCAR1 OUTCAR2 ... ')
   print('     Step #2 (compute)  :  pyhma --compute')
   sys.exit(0)
 
-
-# if ('--read' not in opts_dic) and ('--vasp' not in opts_dic) and len(args) == 0: #read
-#   if len(opts) != 2 or len(args) == 0:
-#     print('Usage (read data):  pyhma --vasp --read OUTCAR(s)')
-#     sys.exit()
-# elif '--vasp' not in opts_dic: #compute
-#   if len(opts) != 1 or len(args) != 1:
-#     print('Usage (compute):  pyhma --vasp pyhma.in')
-#     sys.exit()
-# 
-# if len(opts) != 2 or len(args) == 0:
-#   # reading data
-#   if '--read' in opts_dic:
-#     print(' Usage: pyhma  [--read]  [--vasp|--lammps]  filenames[OUTCAR|lammps.out]')
-#   # computing
-#   if '--read' not in opts_dic:
-#     print(' Usage: pyhma  [--vasp|--lammps]  pyhma.in')
-#   sys.exit()
-  
-  
 filenames = args
 
 if '--readvasp' in opts_dic:
@@ -40,21 +20,13 @@ if '--readvasp' in opts_dic:
   from pyhma import ReadVASP
   rv = ReadVASP(*filenames)
   rv.read()
+
 elif '--compute' in opts_dic:
+
   # compute
   from pyhma import Simulation
   sim = Simulation()
-
-  #pr = cProfile.Profile()
-  #pr.enable()
   sim.run()
-  #pr.disable()
-  #s = io.StringIO()
-  #sortby = SortKey.CUMULATIVE
-  #ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-  #ps.print_stats()
-  #print(s.getvalue())
-
   data = sim.get_statistics()
 
   print(' Anharmonic energy [eV/atom]:')
@@ -63,7 +35,5 @@ elif '--compute' in opts_dic:
   print(' Anharmonic pressure [GPa]:')
   print('  conv.:', data['pahc'])
   print('  hma  :', data['pahm'])
-
-
 
 

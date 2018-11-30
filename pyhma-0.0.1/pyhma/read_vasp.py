@@ -1,53 +1,26 @@
-##############################################################################
-# pymbar: A Python Library for pyhma
-#
-# Copyright 2018 University at Buffalo
-#
-# See the MIT License for more details. 
-##############################################################################
+import numpy as np
+import sys
 
-"""A module to read VASP OUTCAR data for pyhma
+""" ReadVASP is a class to read VASP OUTCAR data for pyhma.
 
 """
 
 
-import numpy as np
-import sys
-
 class ReadVASP:
 
-  """
-
-  Notes
-  -------
-
-  After ReadVASP class
-
-
-  """
-
-  
   def __init__(self, *filenames):  # tuple of filenames
-    """ Initialize ReadVASP ...
-
-    """
     self.filenames = filenames
     self.force_tol = 1e-3
 
   def read(self):
 
-    """ Read data from OUTCAR file
-
-    Parameters:
-    ------------
-
-    """
     # create: energy (u.dat), pressure (p.dat), positions-forces (posfor.dat), and lattice (lattice.dat)
     file_u         = open('u.dat', 'w')
     file_p         = open('p.dat', 'w')
     file_posfor    = open('posfor.dat', 'w')
     file_lattice = open('lattice.dat', 'w')
-    with open('u.dat','w') as file_u, open('p.dat','w') as file_p , open('posfor.dat','w') as file_posfor, open('lattice.dat','w') as file_lattice:  
+    with open('u.dat','w') as file_u, open('p.dat','w') as file_p , open('posfor.dat','w') as file_posfor,\
+        open('lattice.dat','w') as file_lattice:  
       # loop over OUTCARs
       is_first_step = True
       is_first_lat = False
@@ -152,11 +125,6 @@ class ReadVASP:
 
 
   def _get_max_forces(self, forces):
-
-    """ Check if some atoms has nonzero forces
-
-    """
-    
     print()
     is_large_force = False
     for i,v in enumerate(forces):

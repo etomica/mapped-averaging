@@ -1,5 +1,5 @@
-Mapped-averaging theory
-########################
+Theory
+##########
 
 Absolute free energy
 =======================
@@ -16,12 +16,12 @@ For simplicity, from now on we will be using unitless energy :math:`{\cal U}\equ
 Free energy derivatives
 ========================
 
-Derivative of free energy w.r.t external perturpation or distortion (e.g., temperature or volume) is related to material properites. For example, average energy :math:`U` and pressure :math:`P` are given by
+Derivative of free energy w.r.t external perturbation or distortion (e.g., temperature or volume) is related to material properties. For example, average energy :math:`U` and pressure :math:`P` are given by
 
 .. math::
    U = {\cal A}_{\beta}  \qquad {\rm  and} \qquad  P = -k_{\rm B}T \; {\cal A}_V
 
-To get general expression of free energy derivative, we will use the vector :math:`{\bf \lambda}` to represent all perturpations of interest; e.g., :math:`\lambda=\left(\beta, V\right)`. The unitless free energy :math:`{\cal A}` at some :math:`\lambda` is then given by
+To get general expression of free energy derivative, we will use the vector :math:`{\bf \lambda}` to represent all perturbations of interest; e.g., :math:`\lambda=\left(\beta, V\right)`. The unitless free energy :math:`{\cal A}` at some :math:`\lambda` is then given by
 
 .. math::
    {\cal A}\left(\lambda\right) = - \ln{Q\left(\lambda\right)}
@@ -75,16 +75,16 @@ We are left with evaluating derivatives of :math:`{\cal U'}`, which are related 
 First, :math:`\cal U` derivatives can be directly evaluated using the relation between the total (Lagrangian) and partial (Eulerian) derivatives: 
 
 .. math::
-   {\rm D}_{\nu} {\cal U} = \partial_{\nu} {\cal U} - {\cal F} \cdot {\bf v}^{\nu}
+   {\rm D}_{\nu} {\cal U} = \partial_{\nu} {\cal U} - {\cal F} \cdot {\dot {\bf x}}^{\nu}
 
-where :math:`{\cal F}\equiv -\nabla {\cal U}=-\beta \nabla U` is forces vector on all atoms and :math:`{\bf v}^{\nu}\equiv \partial_{\nu} {\bf y}` represents the mapping "velocity" of the external perturpation :math:`\nu`. Applying this operator twice, we get the second derivative
+where :math:`{\cal F}\equiv -\nabla {\cal U}=-\beta \nabla U` is forces vector on all atoms and :math:`{\dot {\bf x}}^{\nu}\equiv \partial_{\nu} {\bf y}` represents the mapping "velocity" of the external perturbation :math:`\nu`. Applying this operator twice, we get the second derivative
 
 .. math::
    {\rm D}_{\mu\nu}{\cal U}  = \partial_{\mu\nu} {\cal U} 
-   - \left( \partial_{\mu} {\bf v}^{\nu} + {\bf v}^{\mu}\cdot \nabla {\bf v}^{\nu} \right)\cdot {\cal F} 
-   + {\bf v}^{\nu} \cdot {\Phi} \cdot {\bf v}^{\mu}
-   - \left({\bf v}^{\nu} \cdot \partial_{\mu} {\cal F} 
-   + {\bf v}^{\mu} \cdot \partial_{\nu} {\cal F} \right)
+   - \left( \partial_{\mu} {\dot {\bf x}}^{\nu} + {\dot {\bf x}}^{\mu}\cdot \nabla {\dot {\bf x}}^{\nu} \right)\cdot {\cal F} 
+   + {\dot {\bf x}}^{\nu} \cdot {\Phi} \cdot {\dot {\bf x}}^{\mu}
+   - \left({\dot {\bf x}}^{\nu} \cdot \partial_{\mu} {\cal F} 
+   + {\dot {\bf x}}^{\mu} \cdot \partial_{\nu} {\cal F} \right)
 
 where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix.
 
@@ -92,38 +92,38 @@ where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\
 
 2. *Evaluation of J derivatives*
 
-Now, in order to get :math:`{\rm D}_{\nu}J`, we need to do two steps. First, perform diffirentiation of the phase space volume, using (again) the change of variables technique 
+Now, in order to get :math:`{\rm D}_{\nu}J`, we need to do two steps. First, perform differentiation of the phase space volume, using (again) the change of variables technique 
 
 .. math::
    \frac{\rm d}{{\rm d}\nu} {\Omega(\lambda)} =
    \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} =
    \frac{\rm d}{{\rm d}\nu} \int_{V} {\rm D}_{\nu}J \; {\rm d} {\bf x}
 
-Second,use the Reynolds transport theorem along with the divergence theorem in our multidimentional space
+Second,use the Reynolds transport theorem along with the divergence theorem in our multidimensional space
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\bf v}^{\nu} f\right)\right] {\rm d} {\bf y}
+   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right)\right] {\rm d} {\bf y}
 
 Applying this theorem to our case of interest (i.e., :math:`f=1`; hence, :math:`\partial_{\nu}f=0`), we get
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\bf v}^{\nu} f\right) {\rm d} {\bf y}
+   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) {\rm d} {\bf y}
    =
-   \int_{V} \nabla \cdot \left({\bf v}^{\nu} f\right) J {\rm d} {\bf x}
+   \int_{V} \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) J {\rm d} {\bf x}
 
 where we used the change of variables in the last term on the right-hand side. Now, equating both derivatives we directly get and expression for :math:`{\rm D}_{\nu}J`
 
 .. math::
-   {\rm D}_{\nu}J = J \nabla \cdot {\bf v}^{\nu} 
+   {\rm D}_{\nu}J = J \nabla \cdot {\dot {\bf x}}^{\nu} 
 
 Repeating the same process with another derivative w.r.t. :math:`\mu`, we directly get
 
 .. math::
-   {\rm D}_{\mu\nu}J = J \left[\nabla \cdot \left(\partial_{\mu}{\bf v}^{\nu}\right) 
-   + {\bf v}^{\mu}\cdot \nabla\left(\nabla\cdot{\bf v}^{\nu}\right)\right]
+   {\rm D}_{\mu\nu}J = J \left[\nabla \cdot \left(\partial_{\mu}{\dot {\bf x}}^{\nu}\right) 
+   + {\dot {\bf x}}^{\mu}\cdot \nabla\left(\nabla\cdot{\dot {\bf x}}^{\nu}\right)\right]
 
 Since we are interested at evaluating the derivatives at :math:`{\bf y}={\bf x}`, then :math:`J=1`; hence
-:math:`{\rm D}_{\nu}J = \nabla \cdot {\bf v}^{\nu}` and :math:`{\rm D}_{\mu\nu}J = \nabla \cdot \left(\partial_{\mu}{\bf v}^{\nu}\right)  + {\bf v}^{\mu}\cdot \nabla\left(\nabla\cdot{\bf v}^{\nu}\right)`. 
+:math:`{\rm D}_{\nu}J = \nabla \cdot {\dot {\bf x}}^{\nu}` and :math:`{\rm D}_{\mu\nu}J = \nabla \cdot \left(\partial_{\mu}{\dot {\bf x}}^{\nu}\right)  + {\dot {\bf x}}^{\mu}\cdot \nabla\left(\nabla\cdot{\dot {\bf x}}^{\nu}\right)`. 
 
 
 
@@ -131,9 +131,9 @@ Since we are interested at evaluating the derivatives at :math:`{\bf y}={\bf x}`
 
 Mapping velocity
 =================
-Since :math:`Q` is only a function of :math:`\lambda`, **average** free energy dervatives do not depend on how :math:`{\bf x}` get mapped into the :math:`{\bf y}` coordinates; or, in other words, they do not depend on the mapping velocity :math:`{\bf v}^{\nu}`. However, the **fluctuations** (or uncertainty) in these averages do depend on the mapping. Therefore, for the purposes of molecular simulation measurments we need to choose :math:`{\bf v^{\nu}}` that reduces the stocuastic uncertainty as much as possible.
+Since :math:`Q` is only a function of :math:`\lambda`, **average** free energy derivatives do not depend on how :math:`{\bf x}` get mapped into the :math:`{\bf y}` coordinates; or, in other words, they do not depend on the mapping velocity :math:`{\dot {\bf x}}^{\nu}`. However, the **fluctuations** (or uncertainty) in these averages do depend on the mapping. Therefore, for the purposes of molecular simulation measurements we need to choose :math:`{\dot {\bf x}^{\nu}}` that reduces the stochastic uncertainty as much as possible.
 
-To develope such a mapping we need to recognize that free energy derivatives are given as ensemble averages over :math:`{\rm D}_{\nu} {\cal U'}` (and its derivative, :math:`{\rm D}_{\mu\nu} {\cal U'}`).
+To develop such a mapping we need to recognize that free energy derivatives are given as ensemble averages over :math:`{\rm D}_{\nu} {\cal U'}` (and its derivative, :math:`{\rm D}_{\mu\nu} {\cal U'}`).
 Therefore, a perfect mapping is such that :math:`{\rm D}_{\nu} {\cal U'}` is independent on coordinates :math:`\bf x`; hence
 
 .. math::
@@ -143,31 +143,32 @@ Therefore, a perfect mapping is such that :math:`{\rm D}_{\nu} {\cal U'}` is ind
 Using the above energy and Jacobian derivatives, we get
 
 .. math::
-   \partial_{\nu}{\cal A} = \partial_{\nu} {\cal U} - \nabla \cdot {\bf v}^{\nu} - {\cal F}\cdot {\bf v}^{\nu}
+   \partial_{\nu}{\cal A} = \partial_{\nu} {\cal U} - \nabla \cdot {\dot {\bf x}}^{\nu} - {\cal F}\cdot {\dot {\bf x}}^{\nu}
 
-Solving this equation yields the unique mapping that yields no fluctuations; however, there are two problems. First of all, :math:`\partial_{\nu}{\cal A}` is the very quantity that we need to measure. Second, since :math:`{\bf v}^{\nu}` is a multidimentional vector (:math:`3N` for the case of atomic systems) we have underdetermined system as we only have one equation to solve. 
+Solving this equation yields the unique mapping that yields no fluctuations; however, there are two problems. First of all, :math:`\partial_{\nu}{\cal A}` is the very quantity that we need to measure. Second, since :math:`{\dot {\bf x}}^{\nu}` is a multidimensional vector (:math:`3N` for the case of atomic systems) we have under-determined system as we only have one equation to solve. 
 
-The first problem is solved using the fast that :math:`{\bf v}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system, which we will call reference. 
+The first problem is solved using the fast that :math:`{\dot {\bf x}}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system, which we will call reference. 
 
 .. math::
-   \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\bf v}^{\nu} - {\cal F}^{\rm ref}\cdot {\bf v}^{\nu}
+   \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\dot {\bf x}}^{\nu} - {\cal F}^{\rm ref}\cdot {\dot {\bf x}}^{\nu}
 
-where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a contant (only function of :math:`\lambda`), named :math:`c`.
+where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a constant (only function of :math:`\lambda`), named :math:`c`.
 
 To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
 
 .. math::
-   c = \partial_{\nu}{\cal a}^{\rm ref} = \partial_{\nu} {\cal u}^{\rm ref} - \partial_{\nu} v^{\nu} - {\cal f}^{\rm ref} v^{\nu}
+   c = \partial_{\nu}{\cal a}^{\rm ref} = \partial_{\nu} {\cal u}^{\rm ref} - \partial_{x} {\dot x}^{\nu} - {\cal f}^{\rm ref} {\dot x}^{\nu}
 
-where small symbols represent an extensive quantity (i.e., :math:`x\equiv X/{\rm dof}`). For a given configuration :math:`\bf x`, this is a standard first-order differential equation with variable coefficients in :math:`\nu`
+where small symbols represent an extensive quantity (i.e., :math:`x\equiv X/{\rm dof}`). For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x)` 
 
 .. math::
-    \partial_{\nu} v^{\nu} + {\cal f}^{\rm ref} v^{\nu} =
-    \partial_{\nu}{\cal u}^{\rm ref} - c = g
+    \partial_{x} {\dot x}^{\nu}\left( x\right) + {\cal f}\left( x\right)^{\rm ref} {\dot x}^{\nu}\left( x\right)  =
+    \partial_{\nu}{\cal u}\left( x\right)^{\rm ref} - c \equiv g\left( x\right) 
+
+where, for simplicity, we will drop the :math:`\lambda` dependency from all terms.
 
 
-..   \partial_{\nu}{\cal A} = \left< \partial_{\nu} {\cal U} - \nabla \cdot {\bf v}^{\nu} - {\cal F}\cdot {\bf v}^{\nu}\right>
-..   \left< {\rm D}_{\nu}{\cal U'} {\rm D}_{\mu}{\cal U'} \right> 
-..   - \left< {\rm D}_{\nu} {\cal U'} \right>  \left< {\rm D}_{\mu} {\cal U'} \right> 
+.. math::
+   {\dot x}^{\nu} = e^{-G(x)} \left(\int g e^{G(x)}{\rm d}x + {\rm constant} \right) 
 
-
+where :math:`G(x) \equiv \int f {\rm d}x`. The integration constant can be evaluated by requiring the mapping to have some value at some coordinate :math:`x`. Fore example, for the case of crystalline system, :math:`x` represents :math:`{\Delta}x \equiv x-x_{\rm lattice}` and we require the mapping velocity to vanish at :math:`\Delta x = 0`.

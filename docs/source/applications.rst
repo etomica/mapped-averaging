@@ -1,9 +1,9 @@
 Applications
 ############
 
-Crytsalline systems
+Crystalline systems
 ====================
-
+For crystalline systems, we used the harmonic behavior to get an appropriate mapping velocity. For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
 
 Anharmonic energy
 ----------------------
@@ -53,7 +53,7 @@ The general expression for the configurational partition function is given by:
 .. math::
    Q = \int e^{-\beta U} {\rm d} {\bf x} 
 
-For crtsralline systems, we use :math:`\Delta {\bf x} \equiv {\bf x} - {\bf x}^{\rm lat}`
+For crystalline systems, we use :math:`\Delta {\bf x} \equiv {\bf x} - {\bf x}^{\rm lat}`
 
 .. math::
    Q = \int_{\rm WS} e^{-\beta U} \, {\rm d}^{dN}\Delta x 
@@ -74,11 +74,3 @@ The surface (first) term on the right-hand side vanishes due to large values of 
 For :math:`d(N-1)` degrees-of-freedom, we get: :math:`\left<{\bf F}\cdot\Delta{\bf r} \right> = - d\left(N-1\right) k_{\rm B} T`
 
 
-Liquid system
-==============
-
-A
----
-
-B
----

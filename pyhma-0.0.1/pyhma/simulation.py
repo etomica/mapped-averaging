@@ -8,17 +8,11 @@ eV2J = 1.60217733e-19
 data_size = 2  # u & p
 
 """
-
-COMPUTE AVERAGES
+Simulation is a class to compute ensemble averages from outputs of step #1.
 
 """
 
 class Simulation:
-  """
-
-  COMPUTE AVERAGES
-
-  """
 
   def __init__(self):
     files_list = ['lattice.dat','posfor.dat','u.dat','p.dat','pyhma.in']
@@ -74,14 +68,15 @@ class Simulation:
     is_first_step = True
 
     print(' Run ....')
-    with open('posfor.dat') as file_posfor, open('u.dat') as file_u, open('p.dat') as file_p, open('uah.out','w') as file_uah, open('pah.out','w') as file_pah:
+    with open('posfor.dat') as file_posfor, open('u.dat') as file_u, open('p.dat') as file_p,\
+        open('uah.out','w') as file_uah, open('pah.out','w') as file_pah:
       for l,line in enumerate(file_posfor):
         n = (l % int(self.n_atoms+1))-1  # n=-1,0,1,..N-1
         if n == -1: # beginning of each snap
           u = float(file_u.readline())/self.n_atoms
           p_vir = float(file_p.readline())  # p_vir = p_conv - p_ig
           if is_first_step:
-            self.u_lat = u/self.n_atoms
+            self.u_lat = u
             self.p_lat = p_vir
             is_first_step = False
             self.md_steps = 1
@@ -115,18 +110,12 @@ class Simulation:
 
     print(' Done. Found', (self.md_steps-1-self.n_eq) , 'steps after', self.n_eq ,'steps of equilibaration\n')
 
-
-
-    #print(' Lattice (row) vectors:')
-    #print(self.lat_vecs,'\n')
     print(' Temperature           (K):' , self.temperature)
     print(' Volume       (Ang^3/atom):', self.volume)
     print(' Lattice energy  (eV/atom):', self.u_lat)
     print(' Harmonic energy (eV/atom):', 1.5*kBT_eV*(self.n_atoms-1)/self.n_atoms)
-
     print(' Lattice pressure    (GPa):', self.p_lat)
     print(' Harmonic pressure   (GPa):', self.p_qh,'\n')
-
 
 
 
@@ -150,8 +139,6 @@ class Simulation:
             'pahm': {'avg': data_avg[3] , 'err': data_err[3] , 'corr': data_ac[3]}}
 
 
-
-  
   def block_data(self, data):
     sum = np.zeros((1,len(data[0])))
     n = 1  # block number
@@ -180,9 +167,7 @@ class Simulation:
 
 
 
-
-  # check if these files exist (obtained by 'pyhma --vasp --read OUTCAR'):
-  # lattice.dat, posfor.dat , u.dat , and pah.dat
+  # check if these files exis: lattice.dat, posfor.dat , u.dat , and p.dat
   def check_files_found(self , files_list):
     is_file_found = True
     for file_i in files_list:

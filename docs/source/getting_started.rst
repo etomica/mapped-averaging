@@ -1,28 +1,17 @@
 Getting Started
-################
+##################
 
 .. highlight:: bash
 
-Installing ``pyxma``
+Installing ``pyhma``
 =====================
 
-pip
-----
-Or, using the `Python package index <https://pypi.python.org/pypi/pyxma>`_ using ``pip``:
+``pyhma`` can be directlly installed from `Python package index <https://pypi.python.org/pypi/pyhma>`_ using ``pip`` command:
 
 .. code-block:: bash
 
-   pip install pyxma
+   pip install pyhma
 
-
-
-conda
-------
-You can install ``pyxma`` via `conda <http://conda.pydata.org>`_:
-
-.. code-block:: bash
-
-   conda install -c omnia pyxma
 
 
 Example
@@ -30,21 +19,17 @@ Example
 
 .. code-block:: python
 
-  >>> from pyma import pyhma
-  >>> from pyhma import ReadVASP, Compute
-  >>> rv = ReadVASP(*filenames)
-  >>> rv.read()
-  >>> c = Compute()
-  >>> c.compute()
-  >>> data = c.get_statistics()
-  >>> print(data_['uahc'] , data_['uahm'] , data_['pahc'] , data_['pahm'])
-  >>> print('Uah_conv (eV/atom):', data['uahc'])
-  >>> print('Uah_hma  (eV/atom):', data['uahm'])
-  >>> print('Pah_conv (GPa):', data['pahc'])
-  >>> print('Pah_hma  (GPa):', data['pahm'])
+   >>> import pyhma
+   >>> r = pyhma.ReadVASP('OUTCAR1','OUTCAR2','OUTCAR3')
+   >>> r.read()
+   >>> import pyhma
+   >>> sim = pyhma.Simulation()
+   >>> sim.run()  # computes conventional and hma estimates for each configuration
+   >>> data = sim.get_statistics() # computes average, stochastic uncertainty (1:math:`\sigma`), and correlation
+   >>> print(' Anharmonic energy [eV/atom]:')
+   >>> print(' conv.:', data['uahc'])
+   >>> print(' hma  :', data['uahm'])
+   >>> print(' Anharmonic pressure [GPa]:')
+   >>> print(' conv.:', data['pahc'], '[GPa]')
+   >>> print(' hma  :', data['pahm'], '[GPa]')
 
-
-
-
-.. math::
-   

@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyxma'
+project = 'mapped-averaging'
 copyright = '2018, Sabry Moustafa'
 author = 'Sabry Moustafa'
 

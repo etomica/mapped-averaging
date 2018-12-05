@@ -141,12 +141,6 @@ The output from this step should be
     conv.: {'avg': -0.31463552438915376, 'err': 0.06244769350788043, 'corr': 0.6339961621258104}
     hma  : {'avg': -0.31611188863687606, 'err': 0.013142430793349463, 'corr': -0.1737875001083584}
 
+.. note::
 
-
-.. autoclass:: pyhma.ReadVASP
-   :members:
-
-.. autoclass:: pyhma.Simulation
-   :members:
-
-
+   The "err" is the stochastic uncertainty in the average using one standard deviation (:math:`\sigma`) and "corr" is the autocorrelation between adjacent blocks. Note that some correlations from this example are substaintial due to using short blocksize (we only have 2000 steps); hence, we have low quality statistics (inaccurate uncertainities). However, for production results correlations must be as small as possible (:math:`\lesssim 0.2`) and uncertainities can be corrected for correlations using `Kolafa's correction formula <https://www.tandfonline.com/doi/abs/10.1080/00268978600102561>`_.

@@ -1,4 +1,4 @@
-Getting Started
+Getting started
 ##################
 
 .. highlight:: bash
@@ -6,7 +6,7 @@ Getting Started
 Installing ``pyhma``
 =====================
 
-``pyhma`` can be directlly installed from `Python package index <https://pypi.python.org/pypi/pyhma>`_ using ``pip`` command:
+``pyhma`` can be directlly installed from `Python package index <https://pypi.python.org/pypi/pyhma>`_ using ``pip`` command (Python 3.x):
 
 .. code-block:: bash
 
@@ -14,8 +14,10 @@ Installing ``pyhma``
 
 
 
-Example
-========
+Example (``pyhma`` package with VASP)
+=====================================
+
+* Using Python 3.x interpreter:
 
 .. code-block:: python
 
@@ -24,8 +26,8 @@ Example
    >>> r.read()
    >>> import pyhma
    >>> sim = pyhma.Simulation()
-   >>> sim.run()  # computes conventional and hma estimates for each configuration
-   >>> data = sim.get_statistics() # computes average, stochastic uncertainty (1:math:`\sigma`), and correlation
+   >>> sim.run() 
+   >>> data = sim.get_statistics() 
    >>> print(' Anharmonic energy [eV/atom]:')
    >>> print(' conv.:', data['uahc'])
    >>> print(' hma  :', data['uahm'])
@@ -33,3 +35,9 @@ Example
    >>> print(' conv.:', data['pahc'], '[GPa]')
    >>> print(' hma  :', data['pahm'], '[GPa]')
 
+* Using pyhma script:
+
+.. code-block:: bash
+
+   pyhma --readvasp OUTCAR1 OUTCAR2 OUTCAR3
+   pyhma --compute 

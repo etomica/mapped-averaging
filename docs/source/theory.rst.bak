@@ -79,7 +79,7 @@ where :math:`{\cal F}\equiv -\nabla {\cal U}=-\beta \nabla U` is the force vecto
    - \left({\dot {\bf x}}^{\nu} \cdot \partial_{\mu} {\cal F} 
    + {\dot {\bf x}}^{\mu} \cdot \partial_{\nu} {\cal F} \right)
 
-where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix and :math:`{\ddot {\bf x}}^{\mu\nu} \equiv \partial_{\mu} {\dot {\bf x}}^{\nu}` is the :math:`\mu\nu` "acceleration", or the rate of change of :math:`{\dot {\bf x}}^{\nu}` w.r.t. :math:`\mu` (note that :math:`\;{\ddot {\bf x}}^{\mu\nu} \neq {\ddot {\bf x}}^{\nu\mu}`).
+where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix and :math:`{\ddot {\bf x}}^{\mu\nu} \equiv \partial_{\mu} {\dot {\bf x}}^{\nu}` is the :math:`\mu\nu` "accelaration", or the rate of change of :math:`{\dot {\bf x}}^{\nu}` w.r.t. :math:`\mu` (note that :math:`\;{\ddot {\bf x}}^{\mu\nu} \neq {\ddot {\bf x}}^{\nu\mu}`).
 
 |
 
@@ -150,7 +150,7 @@ where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant
 To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
 
 .. math::
-   \partial_{\nu} {\cal u}^{\rm ref} - \partial_{x} {\dot x}^{\nu} - {\cal f}^{\rm ref} {\dot x}^{\nu} = \partial_{\nu}{\cal a}^{\rm ref} \equiv c(\lambda) 
+   c(\lambda) \equiv \partial_{\nu}{\cal a}^{\rm ref} = \partial_{\nu} {\cal u}^{\rm ref} - \partial_{x} {\dot x}^{\nu} - {\cal f}^{\rm ref} {\dot x}^{\nu}
 
 where small symbols represent an intensive quantities (i.e., :math:`x\equiv X/{\rm dof}`). For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x,\lambda)`. For simplicity, we will drop the :math:`\lambda` dependency from all terms, hence
 
@@ -164,5 +164,15 @@ where :math:`g(x)` is a known function once a reference system is chosen. The so
    {\dot x}^{\nu} = e^{-I(x)} \left(\int g \; e^{I(x)}{\rm d}x + {\rm constant} \right) 
 
 where :math:`I(x) \equiv \int f(x)^{\rm ref} {\rm d}x`. The integration constant can be evaluated by requiring the mapping to have some value at some coordinate :math:`x`.
+
+Example: crystals
+=============================
+
+For crystalline systems, a reference for mapping can be chosen to be the non-interacting harmonic system (or, Einstein crystal). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by :math:`u^{\rm ref} = \alpha(\lambda) x^2`; hence, the free energy is given by :math:`a^{\rm ref} = \frac{1}{2} \ln \left[\beta \alpha(\lambda)/\pi\right]`. Accordingly, :math:`f^{\rm ref} = -2 \alpha(\lambda) x\;` , :math:`\; I=- \alpha(\lambda)  x^2`, and :math:`g=(\partial_{\nu}\alpha) x^2 - (\partial_{\nu}\alpha)/2\alpha`. Requiring the mapping velocity to vanish when atoms are at their lattice sites; i.e., :math:`{\dot x}^{\nu} =0` at :math:`x = 0`, the solution of the velocity mapping equation is reduced to
+
+
+.. math::
+   {\dot x}^{\nu} &=& \; e^{-I(x)} \int_{0}^{x} g \; e^{I(x)}{\rm d}x \\
+                  &=& \; e^{\alpha(\lambda)  x^2} \int_{0}^{x} g \; e^{-\alpha(\lambda)  x^2}{\rm d}x
 
 

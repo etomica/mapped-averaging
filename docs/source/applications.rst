@@ -2,8 +2,39 @@ Applications
 ############
 
 Crystalline systems
-====================
-For crystalline systems, we used the harmonic behavior to get an appropriate mapping velocity. For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
+======================
+
+For crystalline systems, a reference for mapping can be chosen to be the non-interacting harmonic system (or, Einstein crystal). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by
+
+.. math::
+   u^{\rm ref} = \alpha(\lambda) x^2
+   
+hence, the free energy is given by
+
+.. math::
+   a^{\rm ref} = \frac{1}{2} \ln \left(\alpha(\lambda)/\pi\right)
+   
+Accordingly, :math:`f^{\rm ref} = -2 \alpha(\lambda) x\;` , :math:`\; I=- \alpha(\lambda)  x^2`, and :math:`g=(\partial_{\nu}\alpha)\left[ x^2 - 1/2\alpha\right]`. Requiring the mapping velocity to vanish when atoms are at their lattice sites; i.e., :math:`{\dot x}^{\nu} =0` at :math:`x = 0`, the solution of the velocity mapping equation is reduced to
+
+
+.. math::
+   {\dot x}^{\nu} &=& \; e^{-I(x)} \int_{0}^{x} g \; e^{I(x)}{\rm d}x \\
+                  &=& \; e^{\alpha(\lambda)  x^2} \int_{0}^{x} g \; e^{-\alpha(\lambda)  x^2}{\rm d}x \\
+                  &=& \; - \frac{\partial_{\nu} \alpha}{2 \alpha} \; x 
+                  = - (\partial_{\nu} a^{\rm ref}) \; x 
+
+- **case 1:** :math:`\nu = \beta`
+
+.. math::
+   {\dot x}^{\beta} = -u^{\rm harm} \; x = -\frac{1}{2\beta} \; x
+
+
+- **case 2:** :math:`\nu = V`
+
+.. math::
+   {\dot x}^{V} = \beta\, p^{\rm harm} \; x  
+
+
 
 Anharmonic energy
 ----------------------
@@ -34,6 +65,9 @@ Anharmonic pressure
    P^{\rm ah} = \left< P^{\rm vir} + c \; {\bf F}\cdot\Delta{\bf r} \right>  - P^{\rm lat} 
 
 where :math:`c` is a constant and given by, :math:`c = \frac{\beta P^{\rm qh} - \rho}{d\left(N-1\right)}`
+
+For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
+
 
 
 Equivalence of both formulations:

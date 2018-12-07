@@ -21,30 +21,50 @@ Accordingly, :math:`f^{\rm ref} = -2 \alpha(\lambda) x\;` , :math:`\; I=- \alpha
    {\dot x}^{\nu} &=& \; e^{-I(x)} \int_{0}^{x} g \; e^{I(x)}{\rm d}x \\
                   &=& \; e^{\alpha(\lambda)  x^2} \int_{0}^{x} g \; e^{-\alpha(\lambda)  x^2}{\rm d}x \\
                   &=& \; - \frac{\partial_{\nu} \alpha}{2 \alpha} \; x 
-                  = - (\partial_{\nu} a^{\rm ref}) \; x 
+
+
+We will now consider two cases: temperature and volume free energy derivative; or energy and pressure, consequently. Note that al energy quantities (and its derivatives, like forces) are multiplied by :math:`\beta`; hence, the force constant :math:`\alpha \rightarrow \beta\alpha`, where :math:`\alpha` is now temperature independent.
 
 - **case 1:** :math:`\nu = \beta`
 
 .. math::
-   {\dot x}^{\beta} = -u^{\rm harm} \; x = -\frac{1}{2\beta} \; x
+   \partial_{\beta} (\beta\alpha) = \alpha
+
+hence,
+
+.. math::
+   {\dot x}^{\beta} = -\frac{1}{2\beta} \; x
+
+To correct for the center-of-mass (c.m.), we need to multiply by :math:`(3N-1)/3N`
+
+
+.. math::
+   {\dot x}^{\beta} = -\frac{1}{2\beta} \; x
 
 
 - **case 2:** :math:`\nu = V`
 
+Here, we need to use the :math:`L`-scaled coordinates (i.e., :math:`x\rightarrow x/L`); hence :math:`\alpha \rightarrow L^2 \beta\alpha = V^{2/3}\beta\alpha(V)`
+
 .. math::
-   {\dot x}^{V} = \beta\, p^{\rm harm} \; x  
+   {\dot x}^{V} &=& - \frac{1}{2} \frac{\partial_{\nu} (V^{2/3}\alpha(V))}{V^{2/3}\alpha(V)} \; x  \\
+   &=& \left(-\frac{1}{2} \frac{\partial_{V}\alpha(V)}{\alpha(V)} - \frac{1}{3V}\right) \; x \\ 
+   &=& \left(\beta\, p^{\rm harm}- \frac{1}{3V}\right) \; x  
+
+For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
+
 
 
 
 Anharmonic energy
 ----------------------
 
-**Conventional:**
+**Conventional (no mapping):**
 
 .. math::
    U^{\rm ah} = \left< U \right> - \frac{d(N-1)}{2} k_{\rm B} T - U^{\rm lat} 
 
-**Mapped averaging:**
+**Mapped averaging (Einstein crystal reference):**
 
 .. math::
    U^{\rm ah} =  \left< U + \frac{1}{2} {\bf F}\cdot\Delta{\bf r}\right> - U^{\rm lat} 
@@ -54,20 +74,17 @@ Anharmonic energy
 Anharmonic pressure
 ----------------------
 
-**Conventional:**
+**Conventional (uniform scaling):**
 
 .. math::
    P^{\rm ah} = \left< P^{\rm vir} \right> + \rho k_{\rm B}T - P^{\rm qh} - P^{\rm lat} 
 
-**Mapped averaging:**
+**Mapped averaging (Einstein crystal reference):**
 
 .. math::
    P^{\rm ah} = \left< P^{\rm vir} + c \; {\bf F}\cdot\Delta{\bf r} \right>  - P^{\rm lat} 
 
 where :math:`c` is a constant and given by, :math:`c = \frac{\beta P^{\rm qh} - \rho}{d\left(N-1\right)}`
-
-For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
-
 
 
 Equivalence of both formulations:

@@ -79,7 +79,7 @@ where :math:`{\cal F}\equiv -\nabla {\cal U}=-\beta \nabla U` is the force vecto
    - \left({\dot {\bf x}}^{\nu} \cdot \partial_{\mu} {\cal F} 
    + {\dot {\bf x}}^{\mu} \cdot \partial_{\nu} {\cal F} \right)
 
-where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix and :math:`{\ddot {\bf x}}^{\mu\nu} \equiv \partial_{\mu} {\dot {\bf x}}^{\nu}` is the :math:`\mu\nu` "acceleration", or the rate of change of :math:`{\dot {\bf x}}^{\nu}` w.r.t. :math:`\mu` (note that :math:`\;{\ddot {\bf x}}^{\mu\nu} \neq {\ddot {\bf x}}^{\nu\mu}`).
+where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\;`  is the force constant matrix and :math:`{\ddot {\bf x}}^{\mu\nu} \equiv \partial_{\mu} {\dot {\bf x}}^{\nu}` is the :math:`\mu\nu` "acceleration", or the rate of change of :math:`{\dot {\bf x}}^{\nu}` w.r.t. :math:`\mu` (note that :math:`\;{\ddot {\bf x}}^{\mu\nu} \Nev {\ddot {\bf x}}^{\nu\mu}`).
 
 |
 

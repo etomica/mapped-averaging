@@ -35,12 +35,6 @@ hence,
 .. math::
    {\dot x}^{\beta} = -\frac{1}{2\beta} \; x
 
-To correct for the center-of-mass (c.m.), we need to multiply by :math:`(3N-1)/3N`
-
-
-.. math::
-   {\dot x}^{\beta} = -\frac{1}{2\beta} \; x
-
 
 - **case 2:** :math:`\nu = V`
 

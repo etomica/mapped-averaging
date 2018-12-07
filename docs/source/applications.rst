@@ -45,7 +45,7 @@ Here, we need to use the :math:`L`-scaled coordinates (i.e., :math:`x\rightarrow
    &=& \left(-\frac{1}{2} \frac{\partial_{V}\alpha(V)}{\alpha(V)} - \frac{1}{3V}\right) \; x \\ 
    &=& \left(\beta\, p^{\rm harm}- \frac{1}{3V}\right) \; x  
 
-For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
+Where :math:`p^{\rm harm}` is the harmonic pressure per each dof. For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
 
 
 

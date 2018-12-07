@@ -4,7 +4,10 @@ Applications
 Crystalline systems
 ======================
 
-For crystalline systems, a reference for mapping can be chosen to be the non-interacting harmonic system (or, Einstein crystal). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by
+mapping using EC reference
+-----------------------------
+
+For crystalline systems, a reference for mapping can be chosen to be the non-interacting harmonic system (or, Einstein crystal, EC). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by
 
 .. math::
    u^{\rm ref} = \alpha(\lambda) x^2

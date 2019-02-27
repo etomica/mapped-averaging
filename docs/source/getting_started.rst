@@ -37,7 +37,7 @@ Example (``pyhma`` package with VASP)
 
 * Using pyhma script:
 
-In the folder containing OUTCAR file/files, create a new file named pyhma.in which specifies the simulation temperature (K), excess harmonic pressure from lattice pressure (GPa), number of equilibrium steps, and blocksize respectively as shown below.
+In the folder containing OUTCAR file/files, create a new file named pyhma.in which specifies the simulation temperature (K), excess harmonic pressure from lattice pressure (GPa), number of equilibrium steps, and blocksize respectively:
 
 .. code-block:: bash
 

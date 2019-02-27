@@ -41,10 +41,10 @@ In the folder containing OUTCAR file/files, create a new file named pyhma.in whi
 
 .. code-block:: bash
 
-TEMP 250
-PQH 5
-NEQ 1000
-BLOCK 1000
+   TEMP 250
+   PQH 5
+   NEQ 1000
+   BLOCK 1000
  
 To calculate the HMA anharmonic energy and pressure:
 

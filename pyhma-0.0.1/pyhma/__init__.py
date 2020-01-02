@@ -1,9 +1,24 @@
-""" This is __init__ from pyhma
+###############################################################################
+# pyhma: A Python library for HMA method 
+# 
+# Copyright (c) 2019
+# 
+# Authors: Sabry Moustafa, Andrew Schultz, and David Kofke 
+# 
+# pyhma is a free software
+###############################################################################
+
+
+"""The pyhma Python package is an implementation of the harmonically-mapped averaging (HMA) method
+to measure anharmonic properties of crystalline systems from MD codes (VASP, currently) outputs.
+
 """
-#print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-#print('( (( ((( (((( ((((( (((((( Welcome to pyhma! )))))) ))))) )))) ))) )) )')
-#print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
+__author__ = "Sabry Moustafa, Andrew Schultz, and David Kofke"
+__license__ = "MIT"
+__email__ = "sabrygad@buffalo.edu, ajs42@buffalo.edu, kofke@buffalo.edu"
 
-from pyhma.read_vasp import ReadVASP
-from pyhma.simulation   import Simulation
+from pyhma.vasprun_reader   import read
+from pyhma.simulation    import Simulation
+from pyhma.nearest_image import NearestImage
+

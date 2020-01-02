@@ -2,38 +2,49 @@
   
 import sys
 import getopt
-import time 
+import pyhma 
  
-opts, args = getopt.getopt(sys.argv[1:], '',['readvasp','readlammps','compute','help'])
-opts_dic=dict(opts)
-
-if '--help' in opts_dic or (len(opts) == 0 and len(args) == 0):
-  print('Usage:')
-  print('     Step #1 (read data):  pyhma --readvasp OUTCAR1 OUTCAR2 ... ')
-  print('     Step #2 (compute)  :  pyhma --compute')
-  sys.exit(0)
-
+try:
+  opts, args = getopt.getopt(sys.argv[1:],'fv',['pressure_qh=', 'steps_eq=', 'blocksize=', 'force_tol=', 'raw_files', 'verbose'])
+except:
+  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  raise
+    
 filenames = args
 
-if '--readvasp' in opts_dic:
-  # read
-  from pyhma import ReadVASP
-  rv = ReadVASP(*filenames)
-  rv.read()
+force_tol   = 0.001  # default 
+raw_files = False  # default
+verbose   = False  # default
 
-elif '--compute' in opts_dic:
+params={}
+for opt, val in opts:
+  if opt == '--pressure_qh':
+    params['pressure_qh'] = float(val)
+  elif opt == '--steps_eq':
+    params['steps_eq'] = int(val)
+  elif opt == '--blocksize':
+    params['blocksize'] = int(val)
+  elif opt == '--force_tol':   # optional
+    force_tol = float(val)
+  elif opt == '--raw_files' or opt == '-f': # optional
+    raw_files = 'True'
+  elif opt == '--verbose' or opt == '-v': # optional
+    verbose = 'True'
 
-  # compute
-  from pyhma import Simulation
-  sim = Simulation()
-  sim.run()
-  data = sim.get_statistics()
+if len(args) == 0 or 'pressure_qh' not in params or 'steps_eq' not in params or 'blocksize' not in params:
+  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  sys.exit(1)
 
-  print(' Anharmonic energy [eV/atom]:')
-  print('  conv.:', data['uahc'])
-  print('  hma  :', data['uahm'],'\n')
-  print(' Anharmonic pressure [GPa]:')
-  print('  conv.:', data['pahc'])
-  print('  hma  :', data['pahm'])
+# Read MD simulation data from vasprun.xml files
+data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=verbose) # a dictionary of data
+
+# Creat simulation object
+sim = pyhma.Simulation(data, pressure_qh=params['pressure_qh'], verbose=verbose)
+
+# Compute anharmonic energy and pressure (Conv and HMA) at each step
+sim.run()
+# Get statistics using block averaging method
+stats = sim.get_stats(steps_eq=params['steps_eq'], blocksize=params['blocksize'])
+sim.print_stats(stats)
 
 

@@ -1,5 +1,0 @@
-# pyhma.in input file for step #2 (Simulation)
-TEMP    1000 # temperature (K)
-PQH     5.5  # quasiharmonic pressure (GPa)
-NEQ     500 # equilibration steps
-BLOCK   30  # blocksize (in steps)

@@ -6,7 +6,7 @@ from setuptools import setup, Extension
 
 
 setup(name='pyhma',
-      version='1.0.0',
+      version='0.0.2',
       description='Python Distribution Utilities',
       author='Sabry Moustafa',
       author_email='sabrygad@buffalo.edu',

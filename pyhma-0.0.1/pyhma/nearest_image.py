@@ -1,3 +1,18 @@
+###############################################################################
+# pyhma: A Python library for HMA method 
+# 
+# Copyright (c) 2019
+# 
+# Authors: Sabry Moustafa, Andrew Schultz, and David Kofke 
+# 
+# pyhma is a free software
+###############################################################################
+
+"""
+This module returns the nearest image of a displacement vector for a given box edge vector.
+"""
+
+
 import numpy as np
 
 class NearestImage:

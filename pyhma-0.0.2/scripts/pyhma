@@ -39,12 +39,12 @@ if len(args) == 0 or 'pressure_qh' not in params or 'steps_eq' not in params or 
 data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=verbose) # a dictionary of data
 
 # Creat simulation object
-sim = pyhma.Simulation(data, pressure_qh=params['pressure_qh'], verbose=verbose)
+sim = pyhma.Simulation(data, pressure_qh=params['pressure_qh'])
 
 # Compute anharmonic energy and pressure (Conv and HMA) at each step
-sim.run()
+sim.run(verbose=verbose)
 # Get statistics using block averaging method
-stats = sim.get_stats(steps_eq=params['steps_eq'], blocksize=params['blocksize'])
+stats = sim.get_stats(steps_eq=params['steps_eq'], blocksize=params['blocksize'], verbose=verbose)
 sim.print_stats(stats)
 
 

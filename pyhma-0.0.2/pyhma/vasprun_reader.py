@@ -77,8 +77,8 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
       pvir /= 10.0 # convert kbar to GPa 
       pressures_vir.append(pvir) 
     
-    # resize the length of all data lists to equal the shortest list 
-    min_len = min([len(positions), len(forces), len(energies), len(pressures_vir)])
+    # resize the length of all data lists
+    min_len =  len(tree.findall("./calculation/energy/i[@name='total']"))
     positions     = positions[0:min_len]
     forces        = forces[0:min_len]
     energies      = energies[0:min_len]

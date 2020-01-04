@@ -17,12 +17,13 @@ B
 
 import numpy as np
 import pyhma
+from pyhma.nearest_image import NearestImage
 
 class Simulation:
   """This Simulation class is a class to compute ensemble averages.
 
   """
-  def __init__(self, data, pressure_qh):
+  def __init__(self, data, pressure_qh, meV=False):
     """Retrieve MD simulation data ('data' dict of the read() method) and user-defined parameters ('params' dict).
     """
     self.temperature   = data['temperature']            # set emperature (K)
@@ -37,7 +38,8 @@ class Simulation:
     self.pressures_vir = data['pressures_vir']          # virial pressure (i.e., without ideal gas) (GPa)
     self.pressure_qh   = pressure_qh                    # quasiharmonic pressure HMA parameter (GPa)
     self.out_data      = np.empty((0,4))                # anharmonic data array ([e_ah_conv, e_ah_hma, p_ah_conv, p_ah_hma])
-
+    self.meV           = meV
+    
   """ compute instantinious 
   """
   def run(self, steps_tot=None, verbose=False):
@@ -73,16 +75,19 @@ class Simulation:
       print(' Lattice pressure    (GPa): %10.5f' % pressure_lat)
       print(' Harmonic pressure   (GPa): %10.5f' % self.pressure_qh)
       print('\n Found', len(self.energies) ,' total MD steps')
-      print(' Using ', self.steps_tot, ' user-set MD steps')
+      print(' Using', self.steps_tot, ' user-set MD steps')
       print('\n Computing instantaneous properties ...')
  
     basis_cart = Simulation._direct_to_cart(self.basis, self.box_row_vecs)
+    e_fac = 1.0
+    if self.meV:
+      e_fac = 1.0e3
     with open('energy_ah.out','w') as file_energy_ah, open('pressure_ah.out','w') as file_pressure_ah:
-      self._nearest_image = pyhma.NearestImage(self.box_row_vecs) 
+      self._nearest_image = NearestImage(self.box_row_vecs) 
       for step in range(self.steps_tot): # snaps
         sim_time = step*self.timestep
         # Conv
-        e_ah_conv = self.energies[step] - energy_lat - 1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms
+        e_ah_conv = e_fac*(self.energies[step] - energy_lat - 1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms)
         p_ah_conv = self.pressures_vir[step] + self.pressure_ig - pressure_lat - self.pressure_qh
         # HMA
         r_cart  = Simulation._direct_to_cart(self.positions[step], self.box_row_vecs)
@@ -96,7 +101,7 @@ class Simulation:
           self._nearest_image.get_nearest_image(dr)
           fdr = fdr + f.dot(dr)
 
-        e_ah_hma  = self.energies[step] + 0.5*fdr/self.num_atoms - energy_lat 
+        e_ah_hma  = e_fac*(self.energies[step] + 0.5*fdr/self.num_atoms - energy_lat)
         p_ah_hma  = self.pressures_vir[step] + f_v*fdr*eV2J - pressure_lat
         print('%10.1f  %10.5f  %10.5f' % (sim_time, e_ah_conv, e_ah_hma) , file=file_energy_ah)
         print('%10.1f  %10.5f  %10.5f' % (sim_time, p_ah_conv, p_ah_hma) , file=file_pressure_ah)
@@ -142,18 +147,24 @@ class Simulation:
 
   """Print statistics (avg, err, cor)
   """
-  @staticmethod
-  def print_stats(out_stats):
+  def print_stats(self, out_stats):
     """ PRINT out_stats
     """
-    print('\n e_ah_conv (meV/atom): %10.5f +/- %5.1e    cor: %3.2f' % (1e3*out_stats['e_ah_conv']['avg'],\
-            1e3*out_stats['e_ah_conv']['err'], out_stats['e_ah_conv']['cor']))
-    print(' e_ah_hma  (meV/atom): %10.5f +/- %5.1e    cor: %3.2f' % (1e3*out_stats['e_ah_hma']['avg'],\
-            1e3*out_stats['e_ah_hma']['err'], out_stats['e_ah_hma']['cor']))
-    print(' p_ah_conv      (GPa): %10.5f +/- %5.1e    cor: %3.2f' % (out_stats['p_ah_conv']['avg'],\
-             out_stats['p_ah_conv']['err'], out_stats['p_ah_conv']['cor']))
-    print(' p_ah_hma       (GPa): %10.5f +/- %5.1e    cor: %3.2f\n' % (out_stats['p_ah_hma']['avg'],\
-             out_stats['p_ah_hma']['err'], out_stats['p_ah_hma']['cor']),end='')
+    e_units='eV'
+    if self.meV:
+      e_units='meV'
+
+    print('\n e_ah_conv (%s/atom): %10.5f +/- %5.1e    cor: %4.2f' % (e_units, out_stats['e_ah_conv']['avg'],\
+          out_stats['e_ah_conv']['err'], out_stats['e_ah_conv']['cor']))
+    print(' e_ah_hma  (%s/atom): %10.5f +/- %5.1e    cor: %4.2f' % (e_units, out_stats['e_ah_hma']['avg'],\
+          out_stats['e_ah_hma']['err'], out_stats['e_ah_hma']['cor']))
+    print(' p_ah_conv      (GPa): %10.5f +/- %5.1e    cor: %4.2f' % (out_stats['p_ah_conv']['avg'],\
+           out_stats['p_ah_conv']['err'], out_stats['p_ah_conv']['cor']))
+    print(' p_ah_hma       (GPa): %10.5f +/- %5.1e    cor: %4.2f\n' % (out_stats['p_ah_hma']['avg'],\
+           out_stats['p_ah_hma']['err'], out_stats['p_ah_hma']['cor']),end='')
+
+
+
 
 
   """Block data to blocks of size blocksize

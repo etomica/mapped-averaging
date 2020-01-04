@@ -5,9 +5,9 @@ import getopt
 import pyhma 
  
 try:
-  opts, args = getopt.getopt(sys.argv[1:],'fv',['pressure_qh=', 'steps_eq=', 'blocksize=', 'force_tol=', 'raw_files', 'verbose'])
+  opts, args = getopt.getopt(sys.argv[1:],'fv',['pressure_qh=', 'steps_eq=', 'steps_tot=', 'blocksize=', 'force_tol=', 'raw_files', 'verbose'])
 except:
-  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps [--steps_tot=total_steps] --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   raise
     
 filenames = args
@@ -15,36 +15,41 @@ filenames = args
 force_tol = 0.001  # default 
 raw_files = False  # default
 verbose   = False  # default
+steps_eq  = 0
+steps_tot  = None
+pressure_qh = 0
+blocksize = 0
 
-params={}
 for opt, val in opts:
   if opt == '--pressure_qh':
-    params['pressure_qh'] = float(val)
+    pressure_qh = float(val)
   elif opt == '--steps_eq':
-    params['steps_eq'] = int(val)
+    steps_eq = int(val)
+  elif opt == '--steps_tot':
+    steps_tot = int(val) 
   elif opt == '--blocksize':
-    params['blocksize'] = int(val)
+    blocksize = int(val)
   elif opt == '--force_tol':   # optional
     force_tol = float(val)
   elif opt == '--raw_files' or opt == '-f': # optional
-    raw_files = 'True'
+    raw_files = True
   elif opt == '--verbose' or opt == '-v': # optional
-    verbose = 'True'
+    verbose = True
 
-if len(args) == 0 or 'pressure_qh' not in params or 'steps_eq' not in params or 'blocksize' not in params:
-  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+if len(args) == 0 or pressure_qh == 0 or steps_eq == 0 or blocksize == 0:
+  print('Usage: pyhma --pressure_qh=quasiharmonic_pressure(GPa) --steps_eq=equilibaration_steps --steps_tot=total_steps --blocksize=blocksize [--force_tol=force_tolerance] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   sys.exit(1)
 
 # Read MD simulation data from vasprun.xml files
 data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=verbose) # a dictionary of data
 
 # Creat simulation object
-sim = pyhma.Simulation(data, pressure_qh=params['pressure_qh'])
+sim = pyhma.Simulation(data, pressure_qh=pressure_qh)
 
 # Compute anharmonic energy and pressure (Conv and HMA) at each step
-sim.run(verbose=verbose)
+sim.run(verbose=verbose, steps_tot=steps_tot)
 # Get statistics using block averaging method
-stats = sim.get_stats(steps_eq=params['steps_eq'], blocksize=params['blocksize'], verbose=verbose)
+stats = sim.get_stats(steps_eq=steps_eq, blocksize=blocksize, verbose=verbose)
 sim.print_stats(stats)
 
 

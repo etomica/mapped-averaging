@@ -40,14 +40,17 @@ class Simulation:
 
   """ compute instantinious 
   """
-  def run(self, steps_tot, verbose=False):
+  def run(self, steps_tot=None, verbose=False):
     """compute Conv and HMA anharmonic energy and pressure.
     """
-    self.steps_tot  = steps_tot
-    if steps_tot > len(self.energies):
-      print(' WARNING! User-set steps_tot (', steps_tot,') can not be larger than MD simulation steps (', len(self.energies),').')
-      print('          Reduce steps_tot and try again.')
-      return
+    if steps_tot == None:
+      self.steps_tot  = len(self.energies)
+    else:
+      self.steps_tot  = steps_tot
+      if steps_tot > len(self.energies):
+        print(' WARNING! User-set steps_tot (', steps_tot,') can not be larger than MD simulation steps (', len(self.energies),').')
+        print('          Reduce steps_tot and try again.')
+        raise RuntimeError('Illegal total number of steps.')
 
     kB = 0.0000861733063733830                            # Boltzmann's constant (eV/K)
     eV2J = 1.60217733e-19                                 # eV to Joules conversion factor
@@ -106,11 +109,11 @@ class Simulation:
     if self.steps_tot < steps_eq:
       print('WARNING! Number of equilibaration steps (', steps_eq,') can not be larger than total steps (', self.steps_tot,').')
       print('         Reduce steps_eq and try again.')
-      return
-    elif int((self.steps_tot - steps_eq)/blocksize) == 0:
-      print('WARNING! Number of blocks ((steps_tot-steps_eq)/blocksize) is zero.')
+      raise RuntimeError('Illegal equilibaration steps.')
+    elif int((self.steps_tot - steps_eq)/blocksize) < 2:
+      print('WARNING! Number of blocks ((steps_tot-steps_eq)/blocksize) must be at least two.')
       print('         Reduce blocksize to get finite number of blocks and try again.')
-      return 
+      raise RuntimeError('Illegal block size.') 
 
     n_prod = self.steps_tot - steps_eq
     data_prod = self.out_data[steps_eq:self.steps_tot,:]

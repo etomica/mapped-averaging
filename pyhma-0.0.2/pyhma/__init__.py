@@ -19,5 +19,5 @@ __license__ = "MIT"
 __email__ = "sabrygad@buffalo.edu, ajs42@buffalo.edu, kofke@buffalo.edu"
 
 from pyhma.vasp_reader   import read
-from pyhma.simulation    import Simulation
+from pyhma.processor     import Processor
 

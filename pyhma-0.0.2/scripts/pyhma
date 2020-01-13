@@ -5,20 +5,21 @@ import getopt
 import pyhma 
  
 try:
-  opts, args = getopt.getopt(sys.argv[1:],'fv',['pressure_qh=', 'steps_eq=', 'steps_tot=', 'blocksize=', 'force_tol=', 'meV', 'raw_files', 'verbose'])
+  opts, args = getopt.getopt(sys.argv[1:],'rv',['pressure_qh=', 'steps_eq=', 'steps_tot=', 'blocksize=', 'force_tol=', 'meV', 'raw_files', 'verbose'])
 except:
-  print('Usage: pyhma --pressure_qh=quasiharmonic pressure(GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--meV=units of e_ah] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  print('Usage: pyhma --pressure_qh=quasiharmonic pressure (GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   raise
     
 filenames = args
 
+pressure_qh = 0      # *required*
+steps_eq    = 0      # *required*
+blocksize   = 0      # *required*
+
 force_tol   = 0.001  # optional
 raw_files   = False  # optional
 verbose     = False  # optional
-steps_eq    = 0      # *required*
 steps_tot   = None   # optional (default is total MD steps in vasprun.xml)
-pressure_qh = 0      # *required*
-blocksize   = 0      # *required*
 meV         = False  # optional
 
 for opt, val in opts:
@@ -30,28 +31,28 @@ for opt, val in opts:
     steps_tot = int(val) 
   elif opt == '--blocksize':
     blocksize = int(val)
-  elif opt == '--force_tol':   # optional
+  elif opt == '--force_tol':   
     force_tol = float(val)
   elif opt == '--meV':
     meV = True
-  elif opt == '--raw_files' or opt == '-f': # optional
+  elif opt == '--raw_files' or opt == '-r': 
     raw_files = True
-  elif opt == '--verbose' or opt == '-v': # optional
+  elif opt == '--verbose' or opt == '-v': 
     verbose = True
 
 if len(args) == 0 or pressure_qh == 0 or steps_eq == 0 or blocksize == 0:
-  print('Usage: pyhma --pressure_qh=quasiharmonic pressure(GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--meV=units of e_ah] [--raw_files|-f] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  print('Usage: pyhma --pressure_qh=quasiharmonic pressure (GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   sys.exit(1)
 
 # Read MD simulation data from vasprun.xml files
 data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=verbose) # a dictionary of data
 
 # Creat simulation object
-sim = pyhma.Simulation(data, pressure_qh=pressure_qh, meV=meV)
+proc = pyhma.Processor(data, pressure_qh=pressure_qh, meV=meV)
 
 # Compute anharmonic energy and pressure (Conv and HMA) at each step
-sim.run(verbose=verbose, steps_tot=steps_tot)
+proc.compute(verbose=verbose, steps_tot=steps_tot)
 # Get statistics using block averaging method
-stats = sim.get_stats(steps_eq=steps_eq, blocksize=blocksize, verbose=verbose)
-sim.print_stats(stats)
+stats = proc.get_stats(steps_eq=steps_eq, blocksize=blocksize, verbose=verbose)
+proc.print_stats(stats)
 

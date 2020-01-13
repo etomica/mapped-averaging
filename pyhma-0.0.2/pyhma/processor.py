@@ -19,8 +19,8 @@ import numpy as np
 import pyhma
 from pyhma.nearest_image import NearestImage
 
-class Simulation:
-  """This Simulation class is a class to compute ensemble averages.
+class Processor:
+  """This Processor class is a class to compute ensemble averages.
 
   """
   def __init__(self, data, pressure_qh, meV=False):
@@ -42,7 +42,7 @@ class Simulation:
     
   """ compute instantinious 
   """
-  def run(self, steps_tot=None, verbose=False):
+  def compute(self, steps_tot=None, verbose=False):
     """compute Conv and HMA anharmonic energy and pressure.
     """
     if steps_tot == None:
@@ -78,7 +78,7 @@ class Simulation:
       print(' Using', self.steps_tot, ' user-set MD steps')
       print('\n Computing instantaneous properties ...')
  
-    basis_cart = Simulation._direct_to_cart(self.basis, self.box_row_vecs)
+    basis_cart = Processor._direct_to_cart(self.basis, self.box_row_vecs)
     e_fac = 1.0
     if self.meV:
       e_fac = 1.0e3
@@ -90,7 +90,7 @@ class Simulation:
         e_ah_conv = e_fac*(self.energies[step] - energy_lat - 1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms)
         p_ah_conv = self.pressures_vir[step] + self.pressure_ig - pressure_lat - self.pressure_qh
         # HMA
-        r_cart  = Simulation._direct_to_cart(self.positions[step], self.box_row_vecs)
+        r_cart  = Processor._direct_to_cart(self.positions[step], self.box_row_vecs)
         fdr = 0
         for atom in range(self.num_atoms): # atoms
           f  = self.forces[step][atom]
@@ -130,13 +130,13 @@ class Simulation:
       print('',int((self.steps_tot-steps_eq)/blocksize), 'blocks (blocksize =' ,  blocksize,' steps)\n')
       print(' Computing statistics ...')
 
-    data_prod_block = Simulation._block_data(data_prod, blocksize) 
+    data_prod_block = Processor._block_data(data_prod, blocksize) 
     # Averages
     data_avg = np.average(data_prod, axis=0) # used raw data because average should be independent on blocks
     # Uncertainty
     data_err = np.std(data_prod_block, ddof = 1, axis=0)/np.sqrt(len(data_prod_block))
     # Correlation
-    data_cor = Simulation._get_cor(data_prod_block)
+    data_cor = Processor._get_cor(data_prod_block)
 
     self.out_stats = {'e_ah_conv': {'avg': data_avg[0] , 'err': data_err[0] , 'cor': data_cor[0]},\
                       'e_ah_hma' : {'avg': data_avg[1] , 'err': data_err[1] , 'cor': data_cor[1]}, \

@@ -1,24 +1,25 @@
+############################################
+Welcome to the Mapped-Averaging project
+############################################
+This project is a Python implementation of the `Mapped-Averaging`_ method for precise estimation of ensemble averages using molecular simulation.
 
-Welcome to the mapped-averaging project
-=========================================
-This project is a Python implementation of the `mapped-averaging <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ method for precise estimation of ensemble averages from molecular simulation outputs.
 
 .. figure:: picture.png
-   :scale: 100 %
-   :alt: map to buried treasure
+   :scale: 85%
    :align: right
 
-Documentation
-==============
+.. figure:: picture2.png
+   :scale: 50%
+   :align: right
+
+
 
 .. toctree::
-   :maxdepth: 2 
+   :maxdepth: 2
 
-   getting_started
    theory
    applications
    pyhma 
-
 
 Indices and tables
 ===================
@@ -27,3 +28,5 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+
+.. _Mapped-Averaging: https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018

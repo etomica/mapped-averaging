@@ -15,7 +15,7 @@ to measure anharmonic properties of crystalline systems from MD codes (VASP, cur
 """
 
 __author__ = "Sabry Moustafa, Andrew Schultz, and David Kofke"
-__license__ = "MIT"
+__license__ = "Mozilla Public License"
 __email__ = "sabrygad@buffalo.edu, ajs42@buffalo.edu, kofke@buffalo.edu"
 
 from pyhma.vasp_reader   import read

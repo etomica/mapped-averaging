@@ -1,13 +1,8 @@
-Applications
-############
+.. _application_crystal:
 
-Crystalline systems
-======================
-
-mapping using EC reference
------------------------------
-
-For crystalline systems, a reference for mapping can be chosen to be the non-interacting harmonic system (or, Einstein crystal, EC). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by
+Application to Crystals
+#########################
+For crystalline systems, a reference for mapping can be chosen to be non-interacting harmonic system, or Einstein crystal (EC). Using the offset from the lattice sites (i.e., :math:`r-r_{\rm lattice}`) to represent our coordinate :math:`x`, the potential energy for each dof is then given by
 
 .. math::
    u^{\rm ref} = \alpha(\lambda) x^2
@@ -48,13 +43,13 @@ Here, we need to use the :math:`L`-scaled coordinates (i.e., :math:`x\rightarrow
    &=& \left(-\frac{1}{2} \frac{\partial_{V}\alpha(V)}{\alpha(V)} - \frac{1}{3V}\right) \; x \\ 
    &=& \left(\beta\, p^{\rm harm}- \frac{1}{3V}\right) \; x  
 
-Where :math:`p^{\rm harm}` is the harmonic pressure per each dof. For more details you can refer to our our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
+Where :math:`p^{\rm harm}` is the harmonic pressure per each dof. For more details you can refer to our `PRE <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ and `JCTC <https://pubs.acs.org/doi/abs/10.1021/acs.jctc.6b00018>`_ work.
 
 
 
 
 Anharmonic energy
-----------------------
+====================
 
 **Conventional (no mapping):**
 
@@ -69,7 +64,7 @@ Anharmonic energy
 |
 
 Anharmonic pressure
-----------------------
+====================
 
 **Conventional (uniform scaling):**
 
@@ -84,13 +79,27 @@ Anharmonic pressure
 where :math:`c` is a constant and given by, :math:`c = \frac{\beta P^{\rm qh} - \rho}{d\left(N-1\right)}`
 
 
-Equivalence of both formulations:
-----------------------------------
+The formulas for both anharmonic energy and pressure are summarized in :numref:`Figure %s <pyhma_eqs>`.
+
+.. _pyhma_eqs:
+.. figure:: pyhma_eqs.png
+   :align: center
+
+   Conventional and HMA formulas for anharmonic energy and pressure.
+
+
+
+
+
+
+Equivalence of Conv and HMA
+============================
 
 The equivalence between both conventional and mapped-averaging expressions can be easily seen by recognizing this equality for crystalline systems:
 
 .. math::
    \left<{\bf F}\cdot\Delta{\bf r} \right> = - d\left(N-1\right) k_{\rm B} T 
+
 Plugging this expression into the HMA expressions yields the conventional average expression.
 
 
@@ -105,15 +114,18 @@ For crystalline systems, we use :math:`\Delta {\bf x} \equiv {\bf x} - {\bf x}^{
 
 .. math::
    Q = \int_{\rm WS} e^{-\beta U} \, {\rm d}^{dN}\Delta x 
+
 Where the integration is carried out withing the Wigner-Seitz (WS) volume of each atom. This can be written as
 
 .. math::
    Q = \int_{\rm WS} {\rm d}^{dN-1}\Delta x \; \int_{\rm WS}  e^{-\beta U} \, {\rm d} \Delta x_1
+
 Using integration by parts:
 
 .. math::
    Q = \int_{\rm WS}  \; \left[\Delta x_1 e^{-\beta U}\right]_{\Delta x_1^{\rm min}}^{\Delta x_1^{\rm max}} {\rm d}^{dN-1}\Delta x
    \;\; -\beta \int_{\rm WS}  F_1 \Delta x_1 \; e^{-\beta U} {\rm d}^{dN}\Delta x
+
 The surface (first) term on the right-hand side vanishes due to large values of :math:`U` at the surface of the WS volume. Dividing by Q, we finally get:
 
 .. math::

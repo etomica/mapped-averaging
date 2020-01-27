@@ -1,17 +1,22 @@
-###############################################################################
-# pyhma: A Python library for HMA method 
+########################################################################
+# pyHMA: A Python Library for HMA 
 # 
-# Copyright (c) 2019
+# Copyright (c) 2020 University at Buffalo
 # 
 # Authors: Sabry Moustafa, Andrew Schultz, and David Kofke 
 # 
-# pyhma is a free software
-###############################################################################
+# pyHMA is free software: you can modify and/or redistribute it under 
+# the terms of the Mozilla Public License.
+#
+# pyHMA is distributed in the hope that it will be useful, but without 
+# any warranty. See the Mozilla Public License for more details.
+#
+########################################################################
 
 """
+pyHMA module 
 
-A
-B
+*  ss s s s s s
 
 """
 
@@ -20,7 +25,16 @@ import pyhma
 from pyhma.nearest_image import NearestImage
 
 class Processor:
-  """This Processor class is a class to compute ensemble averages.
+  """
+  This Processor class is a class to compute ensemble averages.
+
+  Parameters
+  ----------
+  A : a 
+   www
+  B : b
+   www2
+
 
   """
   def __init__(self, data, pressure_qh, meV=False):
@@ -32,38 +46,38 @@ class Processor:
     self.volume_atom   = data['volume_atom']            # specific volume (A^3/atom)
     self.box_row_vecs  = np.array(data['box_row_vecs']) # box edge (raw) vectors (A)
     self.basis         = np.array(data['basis'])        # atomic positions of initial configuration (fractional)
-    self.positions     = np.array(data['positions'])    # positions at each atom at each MD step (fractional)
-    self.forces        = np.array(data['forces'])       # forces at each atom at each MD step (eV/A)
-    self.energies      = np.array(data['energies'])     # energy of each configuration (eV/atom)
-    self.pressures_vir = data['pressures_vir']          # virial pressure (i.e., without ideal gas) (GPa)
+    self.position     = np.array(data['position'])    # positions at each atom at each MD step (fractional)
+    self.force        = np.array(data['force'])       # forces at each atom at each MD step (eV/A)
+    self.energy      = np.array(data['energy'])     # energy of each configuration (eV/atom)
+    self.pressure_vir = data['pressure_vir']          # virial pressure (i.e., without ideal gas) (GPa)
     self.pressure_qh   = pressure_qh                    # quasiharmonic pressure HMA parameter (GPa)
     self.out_data      = np.empty((0,4))                # anharmonic data array ([e_ah_conv, e_ah_hma, p_ah_conv, p_ah_hma])
     self.meV           = meV
     
-  """ compute instantinious 
+  """ compute instantinious properties 
   """
-  def compute(self, steps_tot=None, verbose=False):
+  def process(self, steps_tot=None, verbose=False):
     """compute Conv and HMA anharmonic energy and pressure.
     """
     if steps_tot == None:
-      self.steps_tot  = len(self.energies)
+      self.steps_tot  = len(self.energy)
     else:
       self.steps_tot  = steps_tot
-      if steps_tot > len(self.energies):
-        print(' WARNING! User-set steps_tot (', steps_tot,') can not be larger than MD simulation steps (', len(self.energies),').')
+      if steps_tot > len(self.energy):
+        print(' WARNING! User-set steps_tot (', steps_tot,') can not be larger than MD simulation steps (', len(self.energy),').')
         print('          Reduce steps_tot and try again.')
         raise RuntimeError('Illegal total number of steps.')
 
     kB = 0.0000861733063733830                            # Boltzmann's constant (eV/K)
-    eV2J = 1.60217733e-19                                 # eV to Joules conversion factor
+    eV2J = 1.602176634e-19                                # eV to Joules conversion factor
     kBT_eV = kB*self.temperature                          # eV
     kBT_J  = kBT_eV*eV2J                                  # J
     self.density = 1/self.volume_atom                     # atom/A^3
     self.pressure_ig = self.density*1e30*kBT_J*1e-9       # ideal gas pressure (GPa)
     f_v = (self.pressure_qh*1e9/kBT_J-self.density*1e30)\
          /(3*(self.num_atoms-1))*1e-9                     # f_v variable HMA pressure (GPa/J)
-    energy_lat   = self.energies[0]
-    pressure_lat = self.pressures_vir[0]
+    energy_lat   = self.energy[0]
+    pressure_lat = self.pressure_vir[0]
     if verbose:
       print('\nSimulation data')
       print('===============')
@@ -74,7 +88,7 @@ class Processor:
       print(' Harmonic energy (eV/atom): %10.5f' % (1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms))
       print(' Lattice pressure    (GPa): %10.5f' % pressure_lat)
       print(' Harmonic pressure   (GPa): %10.5f' % self.pressure_qh)
-      print('\n Found', len(self.energies) ,' total MD steps')
+      print('\n Found', len(self.energy) ,' total MD steps')
       print(' Using', self.steps_tot, ' user-set MD steps')
       print('\n Computing instantaneous properties ...')
  
@@ -87,13 +101,13 @@ class Processor:
       for step in range(self.steps_tot): # snaps
         sim_time = step*self.timestep
         # Conv
-        e_ah_conv = e_fac*(self.energies[step] - energy_lat - 1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms)
-        p_ah_conv = self.pressures_vir[step] + self.pressure_ig - pressure_lat - self.pressure_qh
+        e_ah_conv = e_fac*(self.energy[step] - energy_lat - 1.5*kBT_eV*(self.num_atoms-1)/self.num_atoms)
+        p_ah_conv = self.pressure_vir[step] + self.pressure_ig - pressure_lat - self.pressure_qh
         # HMA
-        r_cart  = Processor._direct_to_cart(self.positions[step], self.box_row_vecs)
+        r_cart  = Processor._direct_to_cart(self.position[step], self.box_row_vecs)
         fdr = 0
         for atom in range(self.num_atoms): # atoms
-          f  = self.forces[step][atom]
+          f  = self.force[step][atom]
           dr = r_cart[atom] - basis_cart[atom]
           if atom == 0:
             dr1 = np.copy(dr)
@@ -101,8 +115,8 @@ class Processor:
           self._nearest_image.get_nearest_image(dr)
           fdr = fdr + f.dot(dr)
 
-        e_ah_hma  = e_fac*(self.energies[step] + 0.5*fdr/self.num_atoms - energy_lat)
-        p_ah_hma  = self.pressures_vir[step] + f_v*fdr*eV2J - pressure_lat
+        e_ah_hma  = e_fac*(self.energy[step] + 0.5*fdr/self.num_atoms - energy_lat)
+        p_ah_hma  = self.pressure_vir[step] + f_v*fdr*eV2J - pressure_lat
         print('%10.1f  %10.5f  %10.5f' % (sim_time, e_ah_conv, e_ah_hma) , file=file_energy_ah)
         print('%10.1f  %10.5f  %10.5f' % (sim_time, p_ah_conv, p_ah_hma) , file=file_pressure_ah)
         self.out_data = np.append(self.out_data , [[e_ah_conv, e_ah_hma, p_ah_conv, p_ah_hma]] , axis=0)

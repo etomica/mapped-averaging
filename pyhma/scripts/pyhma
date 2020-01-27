@@ -51,7 +51,7 @@ data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=v
 proc = pyhma.Processor(data, pressure_qh=pressure_qh, meV=meV)
 
 # Compute anharmonic energy and pressure (Conv and HMA) at each step
-proc.compute(verbose=verbose, steps_tot=steps_tot)
+proc.process(verbose=verbose, steps_tot=steps_tot)
 # Get statistics using block averaging method
 stats = proc.get_stats(steps_eq=steps_eq, blocksize=blocksize, verbose=verbose)
 proc.print_stats(stats)

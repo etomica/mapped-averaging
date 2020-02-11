@@ -5,6 +5,6 @@ This project is a Python implementation of the [mapped-averaging] (https://pubs.
 
 
 <p align="center">
-  <img width="460" height="300" src="docs/source/pyhma_logo.png"/>
+  <img width="460" height="200" src="docs/source/pyhma_logo.png"/>
 </p>
 

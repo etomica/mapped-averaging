@@ -153,7 +153,6 @@ The output is saved to a 2D array (``proc.out_data`` attribute) of length equal 
 The method also generates ``energy_ah.out`` and ``pressure_ah.out`` output files for the instantaneous anharmonic energy (eV/atom; or meV/atom if meV=True) and pressure (GPa), respectively. Each file contains three columns; time (in fs), Conv, and HMA estimates of the property. This data is plotted below.
 
 .. figure:: ep_ah.png
-   :scale: 70%
    :align: center
 
    Time vartaion of the anharmonic energy (``energy_ah.out``) and pressure (``pressure_ah.out``).

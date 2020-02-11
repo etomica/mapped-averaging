@@ -5,7 +5,7 @@ This project is a Python implementation of the `Mapped-Averaging`_ method for pr
 
 
 .. figure:: ep_ah_col.png
-   :scale: 55%
+   :scale: 30%
    :align: right
 
 

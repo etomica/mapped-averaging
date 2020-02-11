@@ -9,6 +9,4 @@ This project is a Python implementation of the [mapped-averaging] (https://pubs.
 </p>
 
 
-##![pyhma logo](docs/source/pyhma_logo.png)
-##![pyhma logo](docs/source/pyhma_logo.png)
-##![pyhma logo](docs/source/pyhma_logo.png)
+<! ![pyhma logo](docs/source/pyhma_logo.png)>

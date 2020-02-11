@@ -38,29 +38,34 @@ release = '0.0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 
+
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.githubpages',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'numpydoc'
+    'sphinx.ext.githubpages',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon'
 ]
 
-#extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx',
-#              'sphinx.ext.todo', 'sphinx.ext.ifconfig',
-#              'sphinx.ext.inheritance_diagram',
-#              'sphinx.ext.extlinks', 'numpydoc'
-#              ]
+autodoc_mock_imports = ['numpy']
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None), 'numpy': ('https://docs.scipy.org/doc/numpy', None)}
 
-#extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx',
-#              'sphinx.ext.todo', 'sphinx.ext.imgmath', 'sphinx.ext.ifconfig',
-#              'numpydoc', 'sphinx.ext.inheritance_diagram', 'sphinx.ext.githubpages',
-#              'sphinx.ext.extlinks', 'sphinx.ext.mathjax']
 
-numpydoc_show_class_members = False
+#numpydoc_show_class_members = False
+#numpydoc_use_blockquotes = True
+#napoleon_google_docstring = False
+#napoleon_numpy_docstring = True
+#napoleon_use_ivar = False
+
+numpydoc_xref_param_type = True
+napoleon_use_param = True
+napoleon_use_rtype = False
+
+# Include class __init__ in autodocs.
+autoclass_content = 'both'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -69,7 +74,8 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
@@ -87,7 +93,7 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = 'sphinx'
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -95,8 +101,9 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+#html_theme = 'default'
 #html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_rtd_theme'   
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -104,10 +111,16 @@ html_theme = 'sphinx_rtd_theme'
 #
 # html_theme_options = {}
 
+
+# The name of an image file (relative to this directory) to place at the top
+# of the sidebar.
+html_logo = "pyhma_logo.png"
+
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = []
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -128,7 +141,7 @@ htmlhelp_basename = 'pyhmadoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements = {
+#latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
@@ -144,7 +157,7 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
-}
+#}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
@@ -200,7 +213,6 @@ epub_exclude_files = ['search.html']
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 
@@ -208,3 +220,6 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 todo_include_todos = True
 numfig = True
 autodoc_member_order = 'bysource'
+
+
+

@@ -6,18 +6,18 @@ Installation
 
 .. highlight:: bash
 
-.. warning::
+.. attention::
    pyHMA is written in Python 3 syntax; hence, only compatible ``pip`` installer can be used.
 
 
-**from PyPI (Recommended)**
+**From PyPI (Recommended)**
 
 ``pyHMA`` can be directlly installed from `Python Package Index (PyPI) <https://pypi.python.org/pypi/pyhma>`_ using ``pip`` command::
 
    $ pip install pyhma
 
 
-**from Github (development version)**
+**From Github (development version)**
 
 First, clone the source code from the `Github repository <https://github.com/etomica/mapped-averaging>`_::
 

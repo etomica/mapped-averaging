@@ -136,7 +136,7 @@ html_static_path = []
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'pyhmadoc'
+htmlhelp_basename = 'pyhmadocs'
 
 
 # -- Options for LaTeX output ------------------------------------------------

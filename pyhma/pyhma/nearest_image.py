@@ -1,12 +1,18 @@
-###############################################################################
-# pyhma: A Python library for HMA method 
+########################################################################
+# pyHMA: A Python Library for HMA 
 # 
-# Copyright (c) 2019
+# Copyright (c) 2020 University at Buffalo
 # 
 # Authors: Sabry Moustafa, Andrew Schultz, and David Kofke 
 # 
-# pyhma is a free software
-###############################################################################
+# pyHMA is free software: you can modify and/or redistribute it under 
+# the terms of the Mozilla Public License.
+#
+# pyHMA is distributed in the hope that it will be useful, but without 
+# any warranty. See the Mozilla Public License for more details.
+#
+########################################################################
+
 
 """
 This module returns the nearest image of a displacement vector for a given box edge (row) vectors.

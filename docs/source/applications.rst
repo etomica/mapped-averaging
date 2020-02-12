@@ -21,7 +21,7 @@ Accordingly, :math:`f^{\rm ref} = -2 \alpha(\lambda) x\;` , :math:`\; I=- \alpha
                   &=& \; - \frac{\partial_{\nu} \alpha}{2 \alpha} \; x 
 
 
-We will now consider two cases: temperature and volume free energy derivative; or energy and pressure, consequently. Note that al energy quantities (and its derivatives, like forces) are multiplied by :math:`\beta`; hence, the force constant :math:`\alpha \rightarrow \beta\alpha`, where :math:`\alpha` is now temperature independent.
+We will now consider two cases: temperature and volume free energy derivative; or energy and pressure, consequently. Note that all energy quantities (and its derivatives, like forces) are multiplied by :math:`\beta`; hence, the force constant :math:`\alpha \rightarrow \beta\alpha`, where :math:`\alpha` is now temperature independent.
 
 - **case 1:** :math:`\nu = \beta`
 

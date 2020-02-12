@@ -9,7 +9,7 @@ It is based on post-processing ``vasprun.xml`` output file(s) obtained from NVT 
 See :numref:`Table %s <pyhma_eqs>` as an example for HMA expressions for anharmonic energy and pressure, along with direct/conventional (Conv) counterpart.
 
 
-``pyHMA`` is free software: you can modify and/or redistribute it under the terms of the Mozilla Public License.
+``pyHMA`` is free software: you can modify and/or redistribute it under the terms of the Mozilla Public License (`MPL 2.0 <https://www.mozilla.org/en-US/MPL/2.0/>`_).
 
 Please cite this paper when using pyHMA package in your research:
 

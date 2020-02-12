@@ -2,7 +2,7 @@
 
 
 #########
-Moldules
+Modules
 #########
 
 .. toctree::

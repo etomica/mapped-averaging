@@ -5,14 +5,14 @@ Theory
 
 Absolute free energy
 ====================
-The Helmholtz free energy :math:`A` of a system at temperature :math:`T` and volume :math:`V` is related to its configurational partition function :math:`Q` via:
+The classical Helmholtz configurational free energy :math:`A` of a system at temperature :math:`T` and volume :math:`V` is related to its configurational partition function :math:`Q` via:
 
 .. math::
    A = -k_{\rm B}T \ln{Q} \qquad {\rm where} \qquad 
    Q = \int_{V} e^{-\beta U\left({\bf x}\right)} {\rm d} {\bf x}
 
-with :math:`{\bf x}` represents coordinates of all atoms.
-For simplicity, from now on we will be using unitless energy :math:`{\cal U}\equiv \beta U` and free energy :math:`{\cal A}\equiv \beta A` (and their derivatives; e.g., force).
+with :math:`{\bf x}` representing coordinates of all atoms.
+For simplicity, from now on we will be using unitless energy :math:`{\cal U}\equiv \beta U` and free energy :math:`{\cal A}\equiv \beta A` (and their derivatives; e.g., force), where :math:`\beta = 1/k_{\rm B}T`.
 
 Free energy derivatives
 =========================

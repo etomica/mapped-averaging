@@ -20,14 +20,14 @@ Free energy derivatives
 Derivative of free energy w.r.t external perturbation or distortion (e.g., temperature or volume) is related to material properties. For example, average energy :math:`U` and pressure :math:`P` are given by
 
 .. math::
-   U = {\cal A}_{\beta}  \qquad {\rm  and} \qquad  P = -k_{\rm B}T \; {\cal A}_V
+   U = \partial_{\beta}{\cal A}  \qquad {\rm  and} \qquad  P = -k_{\rm B}T \; \partial_{V}{\cal A}
 
-To get general expression of free energy derivative, we will use the vector :math:`{\bf \lambda}` to represent all perturbations of interest; e.g., :math:`\lambda=\left(\beta, V\right)`. The unitless free energy :math:`{\cal A}` at some :math:`\lambda` is then given by
+(using :math:`\partial_{\nu}` to represent the derivative operator :math:`\equiv\frac{\partial}{\partial \nu}`).  To get general expression of free energy derivative, we will use the vector :math:`{\bf \lambda}` to represent all perturbations of interest; e.g., :math:`\lambda=\left(\beta, V\right)`. The unitless free energy :math:`{\cal A}` at some :math:`\lambda` is then given by
 
 .. math::
    {\cal A}\left(\lambda\right) = - \ln{Q\left(\lambda\right)}
 
-and its first and second derivatives are given by (using :math:`\partial_{\nu}` to represent the derivative operator :math:`\equiv\frac{\partial}{\partial \nu}`)
+and its first and second derivatives are given by 
 
 .. math::
    \partial_{\nu}{\cal A} = -\frac{\partial_{\nu} Q}{Q} \qquad {\rm and} \qquad \partial_{\mu\nu}{\cal A} = -\frac{\partial_{\mu\nu}Q }{Q} + \frac{\partial_{\nu} Q}{Q}  \; \frac{\partial_{\mu} Q}{Q} 

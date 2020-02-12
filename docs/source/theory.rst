@@ -105,7 +105,7 @@ Applying this theorem to our case of interest (i.e., :math:`f=1`; hence, :math:`
    =
    \int_{V} \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) J {\rm d} {\bf x}
 
-where we used the change of variables in the last term on the right-hand side. Now, equating both derivatives we directly get and expression for :math:`{\rm D}_{\nu}J`
+where we used the change of variables in the last term on the right-hand side. Now, equating both derivatives we directly get an expression for :math:`{\rm D}_{\nu}J`
 
 .. math::
    {\rm D}_{\nu}J = J \nabla \cdot {\dot {\bf x}}^{\nu} 
@@ -116,7 +116,7 @@ Repeating the same process with another derivative w.r.t. :math:`\mu`, we direct
    {\rm D}_{\mu\nu}J = J \left[\nabla \cdot \left(\partial_{\mu}{\dot {\bf x}}^{\nu}\right) 
    + {\dot {\bf x}}^{\mu}\cdot \nabla\left(\nabla\cdot{\dot {\bf x}}^{\nu}\right)\right]
 
-Since we are interested at evaluating the derivatives at :math:`{\bf y}={\bf x}`, then :math:`J=1`; hence
+Since we are interested in evaluating the derivatives at :math:`{\bf y}={\bf x}`, then :math:`J=1`; hence
 :math:`{\rm D}_{\nu}J = \nabla \cdot {\dot {\bf x}}^{\nu}` and :math:`{\rm D}_{\mu\nu}J = \nabla \cdot \left(\partial_{\mu}{\dot {\bf x}}^{\nu}\right)  + {\dot {\bf x}}^{\mu}\cdot \nabla\left(\nabla\cdot{\dot {\bf x}}^{\nu}\right)`. 
 
 
@@ -125,7 +125,7 @@ Since we are interested at evaluating the derivatives at :math:`{\bf y}={\bf x}`
 
 Mapping velocity
 =================
-Since :math:`Q` is only a function of :math:`\lambda`, **average** free energy derivatives do not depend on how :math:`{\bf x}` get mapped into the :math:`{\bf y}` coordinates; or, in other words, they do not depend on the mapping velocity :math:`{\dot {\bf x}}^{\nu}`. However, the **fluctuations** (or uncertainty) in these averages do depend on the mapping. Therefore, for the purposes of molecular simulation measurements we need to choose :math:`{\dot {\bf x}^{\nu}}` that reduces the stochastic uncertainty as much as possible.
+Since :math:`Q` is a function only of :math:`\lambda`, **average** free energy derivatives do not depend on how :math:`{\bf x}` get mapped into the :math:`{\bf y}` coordinates; or, in other words, they do not depend on the mapping velocity :math:`{\dot {\bf x}}^{\nu}`. However, the **fluctuations** (or uncertainty) in these averages do depend on the mapping. Therefore, for the purposes of molecular simulation measurements we need to choose :math:`{\dot {\bf x}^{\nu}}` that reduces the stochastic uncertainty as much as possible.
 
 To develop such a mapping we need to recognize that free energy derivatives are given as ensemble averages over :math:`{\rm D}_{\nu} {\cal U'}` (and its derivative, :math:`{\rm D}_{\mu\nu} {\cal U'}`).
 Therefore, a perfect mapping is such that :math:`{\rm D}_{\nu} {\cal U'}` is independent on coordinates :math:`\bf x`; hence
@@ -146,7 +146,7 @@ The first problem is solved using the fast that :math:`{\dot {\bf x}}^{\nu}` doe
 .. math::
    \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\dot {\bf x}}^{\nu} - {\cal F}^{\rm ref}\cdot {\dot {\bf x}}^{\nu}
 
-where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (only function of :math:`\lambda`), named :math:`c`.
+where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`.
 
 To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
 

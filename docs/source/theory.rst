@@ -148,12 +148,12 @@ The first problem is solved using the fact that :math:`{\dot {\bf x}}^{\nu}` doe
 
 where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`. Because the reference only approximates :math:`{\mathcal A}`, the :math:`{\dot {\bf x}}^{\nu}` obtained from this formula will not yield a zero-fluctuation average; however, if the reference is a good approximation, we can expect substantially smaller fluctuations in the average.
 
-To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
+To address the second problem, we will assert that each degree of freedom (dof) is mapped with the same amount (scaling); so
 
 .. math::
    \partial_{\nu} {\cal u}^{\rm ref} - \partial_{x} {\dot x}^{\nu} - {\cal f}^{\rm ref} {\dot x}^{\nu} = \partial_{\nu}{\cal a}^{\rm ref} \equiv c(\lambda) 
 
-where small symbols represent an intensive quantities (i.e., :math:`x\equiv X/{\rm dof}`). For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x,\lambda)`. For simplicity, we will drop the :math:`\lambda` dependency from all terms, hence
+where small symbols represent an intensive quantities (e.g., :math:`u\equiv U/{\rm dof}`), and :math:`x` is one of the coordinates of :math:`{\bf x}`. For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x,\lambda)`. For simplicity, we will drop the :math:`\lambda` dependency from all terms, hence
 
 .. math::
     \partial_{x} {\dot x}^{\nu}\left( x\right) + {\cal f}\left( x\right)^{\rm ref} {\dot x}^{\nu}\left( x\right)  =

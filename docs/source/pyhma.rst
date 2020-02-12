@@ -4,7 +4,7 @@
 pyHMA
 ################
 
-``pyHMA`` is a VASP post-processor (written in Python 3) for precise measurment of crystalline *anharmonic* properties using `Harmonically Mapped Averaging (HMA) <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ methd.
+``pyHMA`` is a VASP post-processor (written in Python 3) for precise measurment of crystalline *anharmonic* properties using `Harmonically Mapped Averaging (HMA) <https://journals.aps.org/pre/abstract/10.1103/PhysRevE.92.043303>`_ method.
 It is based on post-processing ``vasprun.xml`` output file(s) obtained from NVT Born-Oppenheimer *ab initio* molecular dynamics (AIMD) simulation. 
 See :numref:`Table %s <pyhma_eqs>` as an example for HMA expressions for anharmonic energy and pressure, along with direct/conventional (Conv) counterpart.
 

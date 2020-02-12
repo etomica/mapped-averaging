@@ -141,12 +141,12 @@ Using the above energy and Jacobian derivatives, we get
 
 Solving this equation yields the unique mapping that yields no fluctuations; however, there are two problems. First of all, :math:`\partial_{\nu}{\cal A}` is the very quantity that we need to measure. Second, since :math:`{\dot {\bf x}}^{\nu}` is a multidimensional vector (:math:`3N` for the case of atomic systems) we have under-determined system as we only have one equation to solve. 
 
-The first problem is solved using the fast that :math:`{\dot {\bf x}}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system, which we will call reference. 
+The first problem is solved using the fact that :math:`{\dot {\bf x}}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system that approximates :math:`{\mathcal A}`, which we will call reference. 
 
 .. math::
    \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\dot {\bf x}}^{\nu} - {\cal F}^{\rm ref}\cdot {\dot {\bf x}}^{\nu}
 
-where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`.
+where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`. Because the reference only approximates :math:`{\mathcal A}`, the :math:`{\dot {\bf x}}^{\nu}` obtained from this formula will not yield a zero-fluctuation average; however, if the reference is a good approximation, we can expect substantially smaller fluctuations in the average.
 
 To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
 

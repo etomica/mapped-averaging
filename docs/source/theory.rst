@@ -89,19 +89,19 @@ where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\
 Now, in order to get :math:`{\rm D}_{\nu}J`, we need to do two steps. First, perform differentiation of the phase space volume, using (again) the change of variables technique 
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} {\Omega(\lambda)} =
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} =
-   \frac{\rm d}{{\rm d}\nu} \int_{V} {\rm D}_{\nu}J \; {\rm d} {\bf x}
+   \partial_{\nu} {\Omega(\lambda)} =
+   \partial_{\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} =
+   \partial_{\nu} \int_{V} {\rm D}_{\nu}J \; {\rm d} {\bf x}
 
 Second,use the Reynolds transport theorem along with the divergence theorem in our multidimensional space
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right)\right] {\rm d} {\bf y}
+   \partial_{\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right)\right] {\rm d} {\bf y}
 
 Applying this theorem to our case of interest (i.e., :math:`f=1`; hence, :math:`\partial_{\nu}f=0`), we get
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) {\rm d} {\bf y}
+   \partial_{\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) {\rm d} {\bf y}
    =
    \int_{V} \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) J {\rm d} {\bf x}
 

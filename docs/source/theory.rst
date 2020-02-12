@@ -89,19 +89,19 @@ where :math:`{\Phi}\equiv \nabla \nabla {\cal U} = \beta \nabla \nabla {\cal U}\
 Now, in order to get :math:`{\rm D}_{\nu}J`, we need to do two steps. First, perform differentiation of the phase space volume, using (again) the change of variables technique 
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} {\Omega(\lambda)} =
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} =
-   \frac{\rm d}{{\rm d}\nu} \int_{V} {\rm D}_{\nu}J \; {\rm d} {\bf x}
+   \partial_{\nu} {\Omega(\lambda)} =
+   \partial_{\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} =
+   \partial_{\nu} \int_{V} {\rm D}_{\nu}J \; {\rm d} {\bf x}
 
 Second,use the Reynolds transport theorem along with the divergence theorem in our multidimensional space
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right)\right] {\rm d} {\bf y}
+   \partial_{\nu} \int_{\Omega(\lambda)} f\left({\bf y},\lambda\right){\rm d} {\bf y} = \int_{\Omega(\lambda)}     \left[\partial_{\nu} f + \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right)\right] {\rm d} {\bf y}
 
 Applying this theorem to our case of interest (i.e., :math:`f=1`; hence, :math:`\partial_{\nu}f=0`), we get
 
 .. math::
-   \frac{\rm d}{{\rm d}\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) {\rm d} {\bf y}
+   \partial_{\nu} \int_{\Omega(\lambda)} 1\; {\rm d} {\bf y} = \int_{\Omega(\lambda)}     \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) {\rm d} {\bf y}
    =
    \int_{V} \nabla \cdot \left({\dot {\bf x}}^{\nu} f\right) J {\rm d} {\bf x}
 
@@ -141,19 +141,19 @@ Using the above energy and Jacobian derivatives, we get
 
 Solving this equation yields the unique mapping that yields no fluctuations; however, there are two problems. First of all, :math:`\partial_{\nu}{\cal A}` is the very quantity that we need to measure. Second, since :math:`{\dot {\bf x}}^{\nu}` is a multidimensional vector (:math:`3N` for the case of atomic systems) we have under-determined system as we only have one equation to solve. 
 
-The first problem is solved using the fast that :math:`{\dot {\bf x}}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system, which we will call reference. 
+The first problem is solved using the fact that :math:`{\dot {\bf x}}^{\nu}` does not affect average estimates; hence, it can be derived from another (known) system that approximates :math:`{\mathcal A}`, which we will call reference. 
 
 .. math::
    \partial_{\nu}{\cal A}^{\rm ref} = \partial_{\nu} {\cal U}^{\rm ref} - \nabla \cdot {\dot {\bf x}}^{\nu} - {\cal F}^{\rm ref}\cdot {\dot {\bf x}}^{\nu}
 
-where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`.
+where :math:`\partial_{\nu}{\cal A}^{\rm ref}` is a reference-dependent constant (function only of :math:`\lambda`), named :math:`c`. Because the reference only approximates :math:`{\mathcal A}`, the :math:`{\dot {\bf x}}^{\nu}` obtained from this formula will not yield a zero-fluctuation average; however, if the reference is a good approximation, we can expect substantially smaller fluctuations in the average.
 
-To solve the second problem, we will assume that each degree of freedom (dof) is mapped with the same amount (scaling); so
+To address the second problem, we will assert that each degree of freedom (dof) is mapped with the same amount (scaling); so
 
 .. math::
    \partial_{\nu} {\cal u}^{\rm ref} - \partial_{x} {\dot x}^{\nu} - {\cal f}^{\rm ref} {\dot x}^{\nu} = \partial_{\nu}{\cal a}^{\rm ref} \equiv c(\lambda) 
 
-where small symbols represent an intensive quantities (i.e., :math:`x\equiv X/{\rm dof}`). For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x,\lambda)`. For simplicity, we will drop the :math:`\lambda` dependency from all terms, hence
+where small symbols represent an intensive quantities (e.g., :math:`u\equiv U/{\rm dof}`), and :math:`x` is one of the coordinates of :math:`{\bf x}`. For a given :math:`\lambda`, this is a standard first-order differential equation, with the unknown being the velocity of mapping :math:`{\dot x}(x,\lambda)`. For simplicity, we will drop the :math:`\lambda` dependency from all terms, hence
 
 .. math::
     \partial_{x} {\dot x}^{\nu}\left( x\right) + {\cal f}\left( x\right)^{\rm ref} {\dot x}^{\nu}\left( x\right)  =

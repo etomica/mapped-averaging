@@ -49,16 +49,17 @@ class Processor:
 
   def __init__(self, data, pressure_qh, meV=False):
     self.temperature   = data['temperature']            # set temperature (K)
+    self.ismear        = data['ismear']                 # Smearing method
     self.timestep      = data['timestep']               # MD timestep size (fs)
     self.num_atoms     = data['num_atoms']              # total number of atoms
     self.volume_atom   = data['volume_atom']            # specific volume (A^3/atom)
     self.box_row_vecs  = np.array(data['box_row_vecs']) # box edge (raw) vectors (A)
     self.basis         = np.array(data['basis'])        # atomic positions of initial configuration (fractional)
-    self.position     = np.array(data['position'])    # positions at each atom at each MD step (fractional)
-    self.force        = np.array(data['force'])       # forces at each atom at each MD step (eV/A)
-    self.energy      = np.array(data['energy'])     # instantaneous potential energy (eV/atom)
-    self.pressure = data['pressure']                # instantaneous pressure  (GPa)
-    self.pressure_ig = data['pressure_ig']          # ideal gas pressure (GPa)
+    self.position     = np.array(data['position'])      # positions at each atom at each MD step (fractional)
+    self.force        = np.array(data['force'])         # forces at each atom at each MD step (eV/A)
+    self.energy      = np.array(data['energy'])         # instantaneous potential energy (eV/atom)
+    self.pressure = data['pressure']                    # instantaneous pressure  (GPa)
+    self.pressure_ig = data['pressure_ig']              # ideal gas pressure (GPa)
     self.pressure_qh   = pressure_qh                    # quasiharmonic pressure HMA parameter (GPa)
     self.out_data      = np.empty((0,4))                # anharmonic data array ([e_ah_conv, e_ah_hma, p_ah_conv, p_ah_hma])
     self.meV           = meV
@@ -127,6 +128,11 @@ class Processor:
     if verbose:
       print('\nSimulation data')
       print('===============')
+      if self.ismear == -1:
+        print(' Electronic free energy (F=E-TS) calculations using Fermi-Dirac statsitics (ISMEAR=-1)')
+      else:
+        print(' Ground-state DFT calculations (E0) using ISMEAR=%s' % (self.ismear))
+                
       print(' Set temperature       (K): %10.5f' % self.temperature)
       print(' Volume         (A^3/atom): %10.5f' % self.volume_atom)
       print(' MD timestep          (fs): %10.5f' % self.timestep)

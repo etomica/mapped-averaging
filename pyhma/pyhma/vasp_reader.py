@@ -25,7 +25,7 @@ A module for extracting data from ``vasprun.xml`` output file(s) of VASP AIMD si
 import numpy as np
 import lxml.etree 
 
-def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
+def read(vasprun_files, force_tol=0.001, raw_files=False, fermi_dirac=False, verbose=False):
   """
   A function that uses LXML parser to extract raw data from ``vasprun.xml`` file(s).
 
@@ -39,7 +39,9 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
     If True, the following raw data files will be generated: energy.dat, poscar_eq.dat, posfor.dat, and pressure.dat. *Default: False*.
   verbose : bool
     If True, pyHMA will print simulation details while reading data. *Default: False*
-
+  fermi_dirac : bool
+    If true, pyHMA uses the electronic free-energy surface F (not the ground-state E0 energy).
+ 
 
   Returns
   -------
@@ -56,7 +58,7 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
   force : list
     Instantaneous atomic forces in eV/Å.
   energy : list
-    Instantaneous potential energy (E0) in eV/atom. 
+    Instantaneous potential energy E0, or electronic free energy F (for ISMEAR=-1), in eV/atom. 
   pressure : list
     Instantaneous pressure in GPa. 
   pressure_ig : float
@@ -65,6 +67,8 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
     MD timestep in fs.
   temperature : float
     NVT set temperature in K.  
+  ismear : int
+    Smearing method (ISMEAR)
 
 
   Notes
@@ -91,7 +95,7 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
   basis        = [] # List of atomic fractional positions of first configuration 
   position     = [] # Instantaneous atomic fractional positions 
   force        = [] # Instantaneous atomic forces in eV/Å
-  energy       = [] # Instantaneous potential energy (E0) in eV/atom
+  energy       = [] # Instantaneous potential energy E0, or electronic free energy F (for ISMEAR=-1), in eV/atom. 
   pressure     = [] # Instantaneous pressure in GPa
   n_files      = len(vasprun_files) # number of vasprun.xml files
   parser       = lxml.etree.XMLParser(recover=True) # LXML parser with the capability to handle broken (incomplete) XML files
@@ -138,8 +142,29 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
         print(' EXITING pyHMA!\n')
         return
 
-    # extract timestep (fs) and temperature (K), and compute ideal-gas pressure (GPa).
-    if i == n_files-1: 
+    # extract smearing method (ISMEAR), timestep (fs), temperature (K), and compute ideal-gas pressure (GPa).
+    if i == (0 if n_files == 1 else 1): 
+      ismear = int(tree.find("./incar/i[@name='ISMEAR']").text) # smearing method
+      if fermi_dirac and ismear == -1:
+        print(' NOTE')
+        print(' ====')
+        print(' This is MD run with Fermi-Dirac statistics (ISMEAR=-1).')
+        print(' It CAN NOT be used to compute anharmonic free energy using thermodynamic integration from T = 0 K,')
+        print(' because the potential energy surface is T-dependent in this case.')
+        print(' It can ONLY be used if interested in a free energy derivative property (e.g., energy or pressure).')
+        print(' In this case, electronic contribution (due to thermal excitation) is included in the measured property.\n') 
+        
+      #if ((fermi_dirac and ismear != -1) or (!fermi_dirac and ismear == -1):
+      if fermi_dirac != (ismear == -1):
+        print(' ERROR!')
+        print(' ======')
+        print(' Inconsistent smearing methods: ISMEAR=%s and fermi_dirac=%s.' % (ismear, fermi_dirac))
+        if ismear == -1:
+          print(' Note that Fermi-Dirac ststistics (ISMEAR=-1) can not be used directly to compute anharmonic free energy')
+          print(' using thermodynamic integration from T = 0 K. Ground-state DFT must be used (e.g., ISMEAR=1).')
+        print(' EXITING pyHMA!\n')
+        return
+      
       timestep = float(tree.find("./incar/i[@name='POTIM']").text) # timestep (fs)
       temperature  = float(tree.find("./incar/i[@name='TEBEG']").text) # temperature (K)
       kB = 0.0000861733063733830                     # Boltzmann's constant (eV/K)
@@ -166,11 +191,19 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
         f.append([float(x) for x in v.text.split()]) 
       force.append(f) 
     
-    # extract energies (E0)
-    for e in tree.findall("./calculation"):
-      ee = e.findall("./scstep/energy/i[@name='e_0_energy']")
-      if len(ee) != 0:
-        energy.append(float(ee[-1].text)/num_atoms) 
+    # extract energies
+    if fermi_dirac:
+      # extract electronic free energy F (using Fermi-Dirac statistics)
+      for e in tree.findall("./calculation"):
+        ee = e.findall("./scstep/energy/i[@name='e_fr_energy']")
+        if len(ee) != 0:
+          energy.append(float(ee[-1].text)/num_atoms)  
+    else:
+      # extract ground state energy E0
+      for e in tree.findall("./calculation"):
+        ee = e.findall("./scstep/energy/i[@name='e_0_energy']")
+        if len(ee) != 0:
+          energy.append(float(ee[-1].text)/num_atoms) 
      
     # extract virial pressures (i.e., total - ideal gas)
     for pvir_elem in tree.findall("./calculation/varray[@name='stress']"): 
@@ -198,7 +231,7 @@ def read(vasprun_files, force_tol=0.001, raw_files=False, verbose=False):
 
   # return a dict of the extracted data
   return {'box_row_vecs': box_row_vecs, 'num_atoms': num_atoms, 'volume_atom': volume_atom, 'basis': basis, 'position': position,\
-          'force': force, 'energy': energy, 'pressure': pressure, 'pressure_ig': pressure_ig, 'timestep': timestep, 'temperature': temperature, }
+          'force': force, 'energy': energy, 'pressure': pressure, 'pressure_ig': pressure_ig, 'timestep': timestep, 'temperature': temperature, 'ismear': ismear}
 
 
 def _is_large_force(force, force_tol):

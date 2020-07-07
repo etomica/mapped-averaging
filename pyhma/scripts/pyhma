@@ -5,7 +5,7 @@ import getopt
 import pyhma 
  
 try:
-  opts, args = getopt.getopt(sys.argv[1:],'rv',['pressure_qh=', 'steps_eq=', 'steps_tot=', 'blocksize=', 'force_tol=', 'meV', 'raw_files', 'verbose'])
+  opts, args = getopt.getopt(sys.argv[1:],'rv',['pressure_qh=', 'steps_eq=', 'steps_tot=', 'blocksize=', 'force_tol=', 'meV', 'fermi_dirac', 'raw_files', 'verbose'])
 except:
   print('Usage: pyhma --pressure_qh=quasiharmonic pressure (GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   raise
@@ -21,6 +21,7 @@ raw_files   = False  # optional
 verbose     = False  # optional
 steps_tot   = None   # optional (default is total MD steps in vasprun.xml)
 meV         = False  # optional
+fermi_dirac = False  # optional
 
 for opt, val in opts:
   if opt == '--pressure_qh':
@@ -35,17 +36,19 @@ for opt, val in opts:
     force_tol = float(val)
   elif opt == '--meV':
     meV = True
+  elif opt == '--fermi_dirac':
+    fermi_dirac = True 
   elif opt == '--raw_files' or opt == '-r': 
     raw_files = True
   elif opt == '--verbose' or opt == '-v': 
     verbose = True
 
 if len(args) == 0 or pressure_qh == 0 or steps_eq == 0 or blocksize == 0:
-  print('Usage: pyhma --pressure_qh=quasiharmonic pressure (GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
+  print('Usage: pyhma --pressure_qh=quasiharmonic pressure (GPa) --steps_eq=equilibaration steps --blocksize=block size [--steps_tot=total steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] [--fermi_dirac] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...\n')
   sys.exit(1)
 
 # Read MD simulation data from vasprun.xml files
-data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, verbose=verbose) # a dictionary of data
+data = pyhma.read(filenames, force_tol=force_tol, raw_files=raw_files, fermi_dirac=fermi_dirac, verbose=verbose) # a dictionary of data
 
 # Creat simulation object
 proc = pyhma.Processor(data, pressure_qh=pressure_qh, meV=meV)

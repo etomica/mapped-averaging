@@ -6,7 +6,7 @@ pyhma.vasp_reader
 #################
 
 
-.. automodule:: pyhma.pyhma.vasp_reader
+.. automodule:: pyhma.vasp_reader
    :members:
 
 

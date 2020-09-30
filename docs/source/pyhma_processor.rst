@@ -6,7 +6,7 @@ pyhma.processor
 #################
 
 
-.. automodule:: pyhma.pyhma.processor
+.. automodule:: pyhma.processor
    :members:
 
 

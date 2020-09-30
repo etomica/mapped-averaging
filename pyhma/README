@@ -1,0 +1,109 @@
+##############################
+README file for pyHMA package.
+##############################
+
+Github source code:
+-------------------
+  https://github.com/etomica/mapped-averaging
+
+Documentation:
+--------------
+  https://pyhmadocs.readthedocs.io/en/latest/
+
+PyPI:
+-----
+  https://pypi.org/project/pyhma/
+
+
+Package files:
+==============
+
+ pyhma/pyhma
+ ............
+  vasp_reader.py   : A module for extracting data from vasprun.xml output file(s) of VASP AIMD simulation so that it can be 
+                     used by the processor.py module to compute anharmonic properties, using Conv and HMA methods.
+  processor.py     : A module for processing the data obtained from the vasp_reader.py module in order to compute anharmonic properties.
+  nearest_image.py : This module returns the nearest image of a displacement vector for a given box edge (row) vectors. 
+
+ pyhma/scripts
+ .............
+  pyhma : a script for using pyHMA from the command-line
+
+ pyhma/example
+ .............
+  input: contains compressed vasprun-1.xml.bz2 and vasprun-2.xml.bz2 input XML files
+  output: contains the following output files obtained by the pyhma script in the example below: poscar_eq.dat, energy.dat, pressure.dat, posfor.dat, energy_ah.out, pressure_ah.out, and log.out.
+
+Input files:
+============
+ Input vasprun.xml files:
+  pyhma/example/input
+  ...................
+   vasprun-1.xml.bz2  vasprun-2.xml.bz2 
+
+ Input files for VASP AIMD:
+  pyhma/example/input/vasp_inputs
+  ...............................
+   INCAR POSCAR KPOINTS POTCAR  
+
+
+Output files:
+=============
+If raw_data=True, the following files will be generated:
+
+ poscar_eq.dat : initial (must be the equilibrium) POSCAR file (in fractional coordinates)
+ energy.dat    : instantaneous potential energy: E0 for ISMEAR =/= -1 or F for ISMEAR=-1 (in eV/atom)
+ pressure.dat  : instantaneous pressure (in GPa)
+ posfor.dat    : instantaneous atomic positions and forces (in A and eV/A)
+
+
+These files will be generated (not optional)*:
+
+ energy_ah.out : instantaneous anharmonic energy (eV/atom; or meV/atom if meV=True) 
+ energy_ah.out :  instantaneous anharmonic pressure (GPa)
+*Each file contains three columns; time (in fs), Conv, and HMA estimates of the property.
+
+Installation:
+=============
+Using pip (Python 3.x), pyHMA can be installed directly from the command-line:
+
+   $ pip install pyhma
+
+Usage:
+======
+From command-line, call pyhma script:
+
+ $ pyhma --pressure_qh=qh pressure (GPa) --steps_eq=equilib. steps --blocksize=block size 
+        [--steps_tot=used steps] [--force_tol=force tolerance] [--raw_files|-r] [--meV] 
+        [--fermi_dirac] [--verbose|-v] vasprun-1.xml vasprun-2.xml ...
+
+ Required:
+  pressure_qh : quasiharmonic pressure (GPa)
+  steps_eq    : number of equilibration steps
+  blocksize   : number of MD steps in each block used for block averaging
+  vasprun.xml : list of vasprun.xml files of the same AIMD simulation, in a consecutive order
+
+ Optional:
+  steps_tot  : total number of MD steps to be used. Default: steps found in vasprun.xml file(s).
+  force_tol  : force tolerance (in eV/Å) on initial configuration. Default: 0.001.
+  raw_files  : generate the following raw data files: energy.dat, poscar_eq.dat, posfor.dat, and pressure.dat. Default: no .dat files generated.
+  verbose    : simulation details will be printed to the console while reading. Default: print only final results.
+  meV        : use meV/atom. Default: eV/atom.
+  fermi_dirac: read finite-temperature electronic free energy, F. Default: ground-state DFT, E0.
+
+Example:
+========
+Below is an example of AIMD simulation of fcc aluminum at high pressure (V=10 A^3/atom) and temperature (1000 K), 
+using ground-state DFT (ISMEAR=1). The simulation consists of two consecutive vasprun.xml runs, with a user-defined 1000 steps for equilibaration,
+out of 10000 total steps, and a blocksize of length 90.
+
+ $ pyhma --pressure_qh=4.94525 --steps_eq=1000 --steps_tot=10000 --blocksize=90  --meV  -v -r input/{vasprun-1.xml,vasprun-2.xml} > output/log.out
+
+The anharmonic energy and pressure output, using Conv and HMA method, is:
+
+  e_ah_conv (meV/atom):    2.10911 +/- 1.1e+00    cor: 0.35
+  e_ah_hma  (meV/atom):    0.42650 +/- 4.3e-02    cor: 0.11
+  p_ah_conv      (GPa):    0.01371 +/- 3.1e-02    cor: 0.36
+  p_ah_hma       (GPa):   -0.03419 +/- 4.1e-03    cor: 0.26
+
+

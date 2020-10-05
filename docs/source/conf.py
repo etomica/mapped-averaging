@@ -50,7 +50,7 @@ extensions = [
     'sphinx.ext.napoleon'
 ]
 
-autodoc_mock_imports = ['numpy']
+autodoc_mock_imports = ['numpy','pyhma']
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None), 'numpy': ('https://numpy.org/doc/stable', None)}
 
 

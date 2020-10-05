@@ -5,7 +5,7 @@ setup.py
 from setuptools import setup, Extension
 
 
-setup(name='pyhma',
+setup(name='pyHMA',
       version='2.0.1',
       description='Python Distribution Utilities',
       author='Sabry Moustafa',

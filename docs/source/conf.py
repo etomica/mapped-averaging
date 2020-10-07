@@ -17,6 +17,8 @@
 #import sys
 #sys.path.insert(0, os.path.abspath('../../pyhma/pyhma'))
 
+import pyhma
+
 # -- Project information -----------------------------------------------------
 
 project = 'mapped-averaging'
